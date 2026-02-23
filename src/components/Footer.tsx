@@ -22,7 +22,7 @@ export default function Footer() {
           <Link href="/curso" className="hover:text-text transition-colors">
             Curso
           </Link>
-          <Link href="/sobre" className="hover:text-text transition-colors">
+          <Link href="/sobre-mi" className="hover:text-text transition-colors">
             Sobre
           </Link>
         </nav>
