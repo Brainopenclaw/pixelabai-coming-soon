@@ -1,29 +1,29 @@
 # Pixelab AI Design System
 
-A comprehensive, production-ready design system built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
+A production-ready design system built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion.
 
 ## 🎨 Design Tokens
 
 ### Colors
 - **Primary**: Orange (#ff6b35), Yellow (#f7c948)
 - **Accent**: Blue (#3b82f6), Purple (#8b5cf6)
-- **Background**: Dark (#0a0a0a)
+- **Background**: #0a0a0a (dark)
 
 ### Typography
-- **Display**: 4rem / 700 weight
-- **Heading**: 2.5rem / 700 weight
-- **Subheading**: 1.5rem / 600 weight
-- **Body**: 1rem / 400 weight
-- **Small**: 0.875rem / 400 weight
+- **Display**: 4rem/700 — Hero headlines
+- **Heading**: 2.5rem/700 — Section titles
+- **Subheading**: 1.5rem/600 — Subsection titles
+- **Body**: 1rem/400 — Content text
+- **Small**: 0.875rem/400 — Captions, labels
 
 ### Spacing
 - **Section Padding**: 6rem
-- **Container Max Width**: 1280px
+- **Container Max Width**: 1280px (7xl)
 
 ### Border Radius
 - **Card**: 1rem
 - **Button**: 0.5rem
-- **Badge**: 9999px (pill)
+- **Badge**: 9999px (pill shape)
 
 ### Shadows
 - **Glow Orange**: `0 0 40px rgba(255, 107, 53, 0.3)`
@@ -39,13 +39,10 @@ A comprehensive, production-ready design system built with Next.js, TypeScript, 
 import { Button } from "@/components/ui";
 
 <Button variant="primary" size="md">Click me</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="cta">CTA with pulse</Button>
+<Button variant="cta">Call to Action</Button>
 ```
-
-**Variants**: `primary` | `secondary` | `ghost` | `cta`  
-**Sizes**: `sm` | `md` | `lg`
+**Variants**: primary | secondary | ghost | cta  
+**Sizes**: sm | md | lg
 
 #### Card
 ```tsx
@@ -53,40 +50,37 @@ import { Card } from "@/components/ui";
 
 <Card hover={true}>
   <h3>Card Title</h3>
-  <p>Card content with hover glow effect</p>
+  <p>Card content with animated hover effect</p>
 </Card>
 ```
-
-#### Section
-```tsx
-import { Section } from "@/components/ui";
-
-<Section background="gradient">
-  {/* Section content */}
-</Section>
-```
-
-**Backgrounds**: `none` | `gradient` | `dots`
 
 #### Container
 ```tsx
 import { Container } from "@/components/ui";
 
 <Container maxWidth="xl">
-  {/* Centered, max-width content */}
+  {/* Centered, responsive content */}
 </Container>
 ```
+**Max Widths**: sm | md | lg | xl | full
 
-**Max Widths**: `sm` | `md` | `lg` | `xl` | `full`
+#### Section
+```tsx
+import { Section } from "@/components/ui";
+
+<Section background="gradient">
+  {/* Full-width section with optional background */}
+</Section>
+```
+**Backgrounds**: none | gradient | dots
 
 #### Badge
 ```tsx
 import { Badge } from "@/components/ui";
 
-<Badge variant="orange">Category</Badge>
+<Badge variant="orange">Featured</Badge>
 ```
-
-**Variants**: `default` | `orange` | `blue` | `purple`
+**Variants**: default | orange | blue | purple
 
 #### Input
 ```tsx
@@ -103,23 +97,21 @@ Fade in + slide up on scroll (IntersectionObserver)
 ```tsx
 import { FadeUp } from "@/components/animations";
 
-<FadeUp delay={0.2} duration={0.6}>
-  <h1>Animated content</h1>
+<FadeUp delay={0.2}>
+  <h1>Animated Heading</h1>
 </FadeUp>
 ```
 
 #### SlideIn
-Slide from left/right on scroll
+Slide from left or right on scroll
 
 ```tsx
 import { SlideIn } from "@/components/animations";
 
 <SlideIn direction="left" delay={0.1}>
-  <p>Slides in from left</p>
+  <p>Content slides in</p>
 </SlideIn>
 ```
-
-**Directions**: `left` | `right`
 
 #### CountUp
 Animated number counter
@@ -127,24 +119,22 @@ Animated number counter
 ```tsx
 import { CountUp } from "@/components/animations";
 
-<CountUp end={1000} start={0} duration={2} prefix="$" suffix="+" />
+<CountUp end={1000} duration={2} prefix="$" suffix="+" />
 ```
 
 #### GlowCard
-Card with border gradient glow on hover
+Card with glow effect on hover
 
 ```tsx
 import { GlowCard } from "@/components/animations";
 
 <GlowCard glowColor="orange">
-  <h3>Glowing card</h3>
+  <h3>Glowing Card</h3>
 </GlowCard>
 ```
 
-**Glow Colors**: `orange` | `blue` | `purple`
-
 #### StaggerChildren
-Staggered reveal for lists/grids
+Staggered animation for lists
 
 ```tsx
 import { StaggerChildren, StaggerItem } from "@/components/animations";
@@ -152,7 +142,6 @@ import { StaggerChildren, StaggerItem } from "@/components/animations";
 <StaggerChildren staggerDelay={0.1}>
   <StaggerItem>Item 1</StaggerItem>
   <StaggerItem>Item 2</StaggerItem>
-  <StaggerItem>Item 3</StaggerItem>
 </StaggerChildren>
 ```
 
@@ -170,7 +159,7 @@ import { TextReveal } from "@/components/animations";
 ### Layout Components
 
 #### Header
-Sticky header with blur backdrop, responsive nav, mobile hamburger menu with animated overlay
+Fixed header with blur backdrop, responsive nav, logo
 
 ```tsx
 import { Header } from "@/components/layout";
@@ -179,7 +168,7 @@ import { Header } from "@/components/layout";
 ```
 
 #### Footer
-Logo, nav links, social icons, copyright
+Footer with logo, description, copyright
 
 ```tsx
 import { Footer } from "@/components/layout";
@@ -190,7 +179,7 @@ import { Footer } from "@/components/layout";
 ### Background Effects
 
 #### AnimatedGrid
-Dot grid pattern with moving spotlight (follows mouse)
+Dot grid pattern background
 
 ```tsx
 import { AnimatedGrid } from "@/components/effects";
@@ -199,7 +188,7 @@ import { AnimatedGrid } from "@/components/effects";
 ```
 
 #### GradientOrbs
-Floating blurred gradient circles
+Floating animated gradient orbs
 
 ```tsx
 import { GradientOrbs } from "@/components/effects";
@@ -208,7 +197,7 @@ import { GradientOrbs } from "@/components/effects";
 ```
 
 #### AuroraBackground
-Ambient color shift effect
+Ambient aurora glow effect
 
 ```tsx
 import { AuroraBackground } from "@/components/effects";
@@ -216,13 +205,11 @@ import { AuroraBackground } from "@/components/effects";
 <AuroraBackground />
 ```
 
-## 🚀 Usage
-
-### Basic Page Structure
+## 🚀 Usage Example
 
 ```tsx
 import { Header, Footer } from "@/components/layout";
-import { Section, Container } from "@/components/ui";
+import { Section, Container, Button } from "@/components/ui";
 import { FadeUp } from "@/components/animations";
 import { GradientOrbs } from "@/components/effects";
 
@@ -235,9 +222,10 @@ export default function Page() {
       <Section background="gradient">
         <Container>
           <FadeUp>
-            <h1 className="text-heading text-gradient-orange">
+            <h1 className="text-display text-gradient-orange">
               Welcome to Pixelab AI
             </h1>
+            <Button variant="cta" size="lg">Get Started</Button>
           </FadeUp>
         </Container>
       </Section>
@@ -250,28 +238,21 @@ export default function Page() {
 
 ## 🎯 Features
 
-- ✅ **Dark theme only** - Optimized for dark mode
-- ✅ **Fully responsive** - Mobile-first design
-- ✅ **Smooth animations** - 60fps Framer Motion animations
-- ✅ **Type-safe** - Full TypeScript support
-- ✅ **Accessible** - Semantic HTML, ARIA labels
-- ✅ **Performance** - IntersectionObserver for scroll animations
-- ✅ **Customizable** - Design tokens via Tailwind config
+✅ Dark theme optimized  
+✅ Fully responsive (mobile-first)  
+✅ Smooth 60fps animations (Framer Motion)  
+✅ Type-safe (TypeScript)  
+✅ Performance-optimized (IntersectionObserver for scroll animations)  
+✅ Accessible (semantic HTML, proper ARIA labels)  
+✅ Customizable via Tailwind config
 
 ## 🛠️ Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
+npm run dev    # Start dev server at localhost:3000
+npm run build  # Production build
+npm start      # Start production server
 ```
 
 ## 📄 License

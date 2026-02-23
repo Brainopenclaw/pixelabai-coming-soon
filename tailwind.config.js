@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,10 +11,8 @@ module.exports = {
         surface: "#111111",
         primary: "#ff6b35",
         secondary: "#f7c948",
-        text: {
-          DEFAULT: "#ffffff",
-          muted: "#a0a0a0",
-        },
+        text: "#ffffff",
+        "text-muted": "#a0a0a0",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
