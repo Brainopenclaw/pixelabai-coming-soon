@@ -1,57 +1,54 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+export type { BlogFaq, BlogPost, BlogPostMeta, Category } from "./blog-constants";
+export { CATEGORIES } from "./blog-constants";
+import type { BlogPost, BlogPostMeta } from "./blog-constants";
 
-export type BlogFaq = { question: string; answer: string };
+const dir = path.join(process.cwd(), "content", "blog");
 
-export type BlogPost = {
-  slug: string;
-  title: string;
-  description: string;
-  excerpt: string;
-  date: string;
-  image: string;
-  imageAlt: string;
-  tags: string[];
-  faqs: BlogFaq[];
-  content: string;
-};
-
-const postsDirectory = path.join(process.cwd(), "content/blog");
-
-export function getAllPosts(): BlogPost[] {
-  if (!fs.existsSync(postsDirectory)) return [];
-  const files = fs
-    .readdirSync(postsDirectory)
-    .filter((f) => f.endsWith(".mdx"));
-  const posts = files.map((filename) => {
-    const filePath = path.join(postsDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
-    return {
-      slug: data.slug || filename.replace(/\.mdx$/, ""),
-      title: data.title || "",
-      date: data.date || "",
-      excerpt: data.excerpt || data.description || "",
-      description: data.description || data.excerpt || "",
-      image: data.image || "/og-default.svg",
-      imageAlt: data.imageAlt || data.title || "",
-      tags: data.tags || [],
-      faqs: data.faqs || [],
-      content,
-    };
-  });
-  return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+function parse(filename: string): BlogPost {
+  const raw = fs.readFileSync(path.join(dir, filename), "utf8");
+  const { data, content } = matter(raw);
+  return {
+    slug: data.slug || filename.replace(/\.mdx$/, ""),
+    title: data.title || "", description: data.description || data.excerpt || "",
+    excerpt: data.excerpt || data.description || "",
+    date: data.date ? new Date(data.date).toISOString().split("T")[0] : "",
+    category: data.category || "Herramientas", tags: data.tags || [],
+    image: data.image || "/og-default.svg", imageAlt: data.imageAlt || data.title || "",
+    readTime: data.readTime || "5 min", author: data.author || "Jorge De Armas",
+    lang: data.lang || "es", faqs: data.faqs || [], content,
+  };
 }
 
-export const BLOG_POSTS = getAllPosts();
-
-export function getLatestPosts(count = 3): BlogPost[] {
-  return BLOG_POSTS.slice(0, count);
+export function getAllPosts(): BlogPostMeta[] {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter((f: string) => f.endsWith(".mdx"))
+    .map((f: string) => { const { content: _, ...meta } = parse(f); return meta; })
+    .sort((a: BlogPostMeta, b: BlogPostMeta) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find((p) => p.slug === slug);
+export function getPostBySlug(slug: string): BlogPost | null {
+  if (!fs.existsSync(dir)) return null;
+  for (const f of fs.readdirSync(dir).filter((f: string) => f.endsWith(".mdx"))) {
+    const post = parse(f);
+    if (post.slug === slug) return post;
+  }
+  return null;
+}
+
+export function getRelatedPosts(currentSlug: string, category: string, limit = 3): BlogPostMeta[] {
+  return getAllPosts().filter((p) => p.slug !== currentSlug && p.category === category).slice(0, limit);
+}
+
+export function extractHeadings(content: string): { id: string; text: string; level: number }[] {
+  const re = /^(#{2,3})\s+(.+)$/gm;
+  const h: { id: string; text: string; level: number }[] = [];
+  let m;
+  while ((m = re.exec(content)) !== null) {
+    const text = m[2].trim();
+    h.push({ id: text.toLowerCase().replace(/[^\w\sáéíóúñü-]/g, "").replace(/\s+/g, "-"), text, level: m[1].length });
+  }
+  return h;
 }
