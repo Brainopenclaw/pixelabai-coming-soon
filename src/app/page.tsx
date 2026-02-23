@@ -4,10 +4,10 @@ import BlogPreview from "@/components/BlogPreview";
 import SocialProof from "@/components/SocialProof";
 import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
-import { getLatestPosts } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
 
 export default function Home() {
-  const posts = getLatestPosts(3);
+  const posts = getAllPosts().slice(0, 3);
 
   return (
     <main className="min-h-screen">
