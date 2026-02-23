@@ -1,5 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import type { BlogPostMeta, Category } from "@/lib/blog-constants";
@@ -37,7 +38,7 @@ export default function BlogIndex({ posts }: { posts: BlogPostMeta[] }) {
           {filtered.slice(0, shown).map((post) => (
             <article key={post.slug} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group">
               <Link href={`/blog/${post.slug}`} className="block">
-                <img src={post.image} alt={post.imageAlt} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                <Image src={post.image} alt={post.imageAlt} width={720} height={288} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                 <div className="p-5">
                   <div className="flex items-center gap-3 text-xs text-text-muted mb-2">
                     <time>{post.date}</time><span>·</span><span>{post.readTime}</span>
