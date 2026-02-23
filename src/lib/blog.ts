@@ -17,13 +17,11 @@ export type BlogPost = {
   content: string;
 };
 
-const postsDirectory = path.join(process.cwd(), "content/blog");
+const postsDirectory = path.join(process.cwd(), "content", "blog");
 
 export function getAllPosts(): BlogPost[] {
   if (!fs.existsSync(postsDirectory)) return [];
-  const files = fs
-    .readdirSync(postsDirectory)
-    .filter((f) => f.endsWith(".mdx"));
+  const files = fs.readdirSync(postsDirectory).filter((f) => f.endsWith(".mdx"));
   const posts = files.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
     const fileContents = fs.readFileSync(filePath, "utf8");
