@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import SystemeForm from "@/components/SystemeForm";
-import { BLOG_POSTS, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { SITE_URL } from "@/lib/seo";
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+  return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
 type Props = {
