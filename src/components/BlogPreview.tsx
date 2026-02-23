@@ -2,14 +2,14 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import type { BlogPost } from "@/lib/blog";
+import type { BlogPostMeta } from "@/lib/blog";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-export default function BlogPreview({ posts }: { posts: BlogPost[] }) {
+export default function BlogPreview({ posts }: { posts: BlogPostMeta[] }) {
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto">
       <motion.h2
