@@ -18,6 +18,11 @@ export default function BlogIndex({ posts }: { posts: BlogPostMeta[] }) {
   const [search, setSearch] = useState("");
   const [cat, setCat] = useState<Category>("Todos");
   const [shown, setShown] = useState(PER_PAGE);
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+
+  const handleImageError = (slug: string) => {
+    setImageErrors(prev => ({ ...prev, [slug]: true }));
+  };
 
   const filtered = useMemo(() => {
     let r = posts;
@@ -63,7 +68,20 @@ export default function BlogIndex({ posts }: { posts: BlogPostMeta[] }) {
             >
               <Link href={`/blog/${post.slug}`} className="block">
                 <div className="relative overflow-hidden">
-                  <Image src={post.image} alt={post.imageAlt} width={720} height={288} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                  {imageErrors[post.slug] ? (
+                    <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-text-muted">
+                      {post.category}
+                    </div>
+                  ) : (
+                    <Image 
+                      src={post.image} 
+                      alt={post.imageAlt} 
+                      width={720} 
+                      height={288} 
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={() => handleImageError(post.slug)}
+                    />
+                  )}
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-3 text-xs text-text-muted mb-2">

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import type { BlogPostMeta } from "@/lib/blog";
 
 const fadeUp = {
@@ -10,6 +12,12 @@ const fadeUp = {
 };
 
 export default function BlogPreview({ posts }: { posts: BlogPostMeta[] }) {
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+
+  const handleImageError = (slug: string) => {
+    setImageErrors(prev => ({ ...prev, [slug]: true }));
+  };
+
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto">
       <motion.h2
@@ -34,8 +42,20 @@ export default function BlogPreview({ posts }: { posts: BlogPostMeta[] }) {
             className="block p-6 rounded-2xl bg-surface border border-white/5 hover:border-primary/30 transition-colors"
             style={{ transformPerspective: 800 }}
           >
-            <div className="w-full h-40 rounded-lg bg-white/5 mb-4 flex items-center justify-center text-text-muted text-sm">
-              📷 {post.title}
+            <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4">
+              {imageErrors[post.slug] ? (
+                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-text-muted text-sm">
+                  {post.category}
+                </div>
+              ) : (
+                <Image 
+                  src={post.image} 
+                  alt={post.imageAlt || post.title}
+                  fill
+                  className="object-cover"
+                  onError={() => handleImageError(post.slug)}
+                />
+              )}
             </div>
             <time className="text-xs text-text-muted">{post.date}</time>
             <h3 className="text-lg font-semibold mt-1 mb-2">{post.title}</h3>
