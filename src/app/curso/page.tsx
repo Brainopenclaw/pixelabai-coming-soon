@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Clock, CheckCircle2, AlertCircle, Zap } from "lucide-react";
+import JsonLd from "@/components/JsonLd";
 
 const painPoints = [
   { icon: Clock, title: "Pierdes horas en tareas que la IA hace en minutos", description: "Crear contenido, responder emails, organizar datos... todo manual, todo lento." },
@@ -25,6 +26,40 @@ const faqs = [
   { q: "¿Cuándo estará disponible el curso?", a: "Estamos preparando el lanzamiento. Al unirte a la lista de espera, serás de los primeros en acceder con un precio especial de lanzamiento." },
   { q: "¿Hay garantía de devolución?", a: "Sí. Ofreceremos una garantía de 30 días. Si no estás satisfecho, te devolvemos el 100% de tu inversión sin preguntas." },
 ];
+
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a
+    }
+  }))
+};
+
+const courseSchema = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: "IA para Tu Negocio",
+  description: "El curso práctico que te enseña a usar inteligencia artificial para ahorrar tiempo, crear contenido y hacer crecer tu negocio — sin necesidad de ser técnico.",
+  provider: {
+    "@type": "Organization",
+    name: "Pixelab AI",
+    url: "https://pixelabai.com"
+  },
+  coursePrerequisites: "Ninguno",
+  educationalLevel: "Principiante",
+  inLanguage: "es",
+  timeRequired: "P4W",
+  availabilityStarts: "2024-01-01",
+  offers: {
+    "@type": "Offer",
+    category: "Paid"
+  }
+};
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
@@ -50,6 +85,8 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 export default function CursoPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
+      <JsonLd data={courseSchema} />
+      <JsonLd data={faqPageSchema} />
       <section className="relative py-24 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
         <div className="relative z-10 max-w-3xl mx-auto">
