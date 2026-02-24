@@ -15,11 +15,21 @@ export const metadata: Metadata = {
     description: "Aprende a usar la IA para transformar tu negocio. Guías prácticas, herramientas y cursos en español.",
     type: "website",
     url: "https://pixelabai.com",
+    siteName: "Pixelab AI",
+    images: [
+      {
+        url: "https://pixelabai.com/blog/ia-para-emprendedores.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Pixelab AI — Aprende IA para tu negocio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pixelab AI — Aprende IA para tu negocio",
     description: "Aprende a usar la IA para transformar tu negocio. Guías prácticas, herramientas y cursos en español.",
+    images: ["https://pixelabai.com/blog/ia-para-emprendedores.jpg"],
   },
   alternates: {
     canonical: "https://pixelabai.com",
