@@ -46,12 +46,11 @@ export default function RecursosPage() {
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.3 }} className="bg-white/5 border border-white/10 rounded-2xl p-8 max-w-lg mx-auto">
             <h3 className="text-xl font-semibold mb-2">📥 Descarga la Guía Gratis</h3>
             <p className="text-gray-400 text-sm mb-4">&quot;5 Formas de Usar IA en Tu Negocio Esta Semana&quot; — recibe la guía directo en tu email.</p>
-            <a 
-              href="/#email-capture" 
+            <Link href="/#email-capture" 
               className="inline-block px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-semibold rounded-lg hover:opacity-90 transition-opacity"
             >
               Descargar Guía Gratis →
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>
