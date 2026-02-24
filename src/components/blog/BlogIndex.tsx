@@ -1,5 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
@@ -7,6 +8,11 @@ import type { BlogPostMeta, Category } from "@/lib/blog-constants";
 import { CATEGORIES } from "@/lib/blog-constants";
 
 const PER_PAGE = 6;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 
 export default function BlogIndex({ posts }: { posts: BlogPostMeta[] }) {
   const [search, setSearch] = useState("");
@@ -22,23 +28,43 @@ export default function BlogIndex({ posts }: { posts: BlogPostMeta[] }) {
 
   return (
     <div>
-      <div className="relative mb-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative mb-6"
+      >
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
         <input type="text" placeholder="Buscar artículos..." value={search} onChange={(e) => { setSearch(e.target.value); setShown(PER_PAGE); }} className="w-full pl-10 pr-4 py-3 rounded-lg bg-surface border border-white/10 text-text placeholder:text-text-muted focus:outline-none focus:border-primary transition-colors" />
-      </div>
-      <div className="flex flex-wrap gap-2 mb-8">
+      </motion.div>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="flex flex-wrap gap-2 mb-8"
+      >
         {CATEGORIES.map((c) => (
           <button key={c} onClick={() => { setCat(c); setShown(PER_PAGE); }} className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${cat === c ? "bg-primary text-white" : "bg-white/5 text-text-muted hover:bg-white/10"}`}>{c}</button>
         ))}
-      </div>
+      </motion.div>
       {filtered.slice(0, shown).length === 0 ? (
         <p className="text-text-muted text-center py-12">No se encontraron artículos.</p>
       ) : (
         <div className="grid md:grid-cols-2 gap-6">
-          {filtered.slice(0, shown).map((post) => (
-            <article key={post.slug} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-colors group">
+          {filtered.slice(0, shown).map((post, i) => (
+            <motion.article
+              key={post.slug}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-300 group"
+            >
               <Link href={`/blog/${post.slug}`} className="block">
-                <Image src={post.image} alt={post.imageAlt} width={720} height={288} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                <div className="relative overflow-hidden">
+                  <Image src={post.image} alt={post.imageAlt} width={720} height={288} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                </div>
                 <div className="p-5">
                   <div className="flex items-center gap-3 text-xs text-text-muted mb-2">
                     <time>{post.date}</time><span>·</span><span>{post.readTime}</span>
@@ -48,14 +74,19 @@ export default function BlogIndex({ posts }: { posts: BlogPostMeta[] }) {
                   <p className="text-sm text-text-muted line-clamp-2">{post.excerpt}</p>
                 </div>
               </Link>
-            </article>
+            </motion.article>
           ))}
         </div>
       )}
       {shown < filtered.length && (
-        <div className="text-center mt-8">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mt-8"
+        >
           <button onClick={() => setShown((s) => s + PER_PAGE)} className="px-6 py-3 rounded-lg bg-white/5 text-text-muted hover:bg-white/10 hover:text-primary transition-colors font-medium">Cargar más</button>
-        </div>
+        </motion.div>
       )}
     </div>
   );
