@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Linkedin, Twitter, Instagram, Youtube, Download } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 
 const milestones = [
   { year: "2015", title: "Inicio en Marketing Digital", description: "Primeros pasos en el mundo del marketing digital, ayudando a pequeños negocios a establecer su presencia online." },
@@ -19,6 +20,25 @@ const socials = [
   { name: "Instagram", icon: Instagram, href: "https://instagram.com/pixelabai" },
   { name: "YouTube", icon: Youtube, href: "https://youtube.com/@pixelabai" },
 ];
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jorge De Armas",
+  jobTitle: "Founder",
+  worksFor: {
+    "@type": "Organization",
+    name: "Pixelab AI",
+    url: "https://pixelabai.com"
+  },
+  description: "Ayudo a emprendedores hispanohablantes a usar la inteligencia artificial para trabajar menos, producir más y escalar sus negocios de forma inteligente.",
+  sameAs: [
+    "https://linkedin.com/in/jorgedearmas",
+    "https://twitter.com/jorgedearmas",
+    "https://instagram.com/pixelabai",
+    "https://youtube.com/@pixelabai"
+  ]
+};
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
@@ -39,6 +59,7 @@ function TimelineItem({ milestone, index }: { milestone: (typeof milestones)[0];
 export default function SobreMiPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
+      <JsonLd data={personSchema} />
       <section className="relative py-24 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 via-transparent to-transparent" />
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-10">

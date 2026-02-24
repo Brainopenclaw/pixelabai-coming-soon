@@ -3,6 +3,7 @@ import Link from "next/link";
 import MdxContent from "@/components/blog/MdxContent";
 import TableOfContents from "@/components/blog/TableOfContents";
 import EmailCapture from "@/components/blog/EmailCapture";
+import JsonLd from "@/components/JsonLd";
 import { getAllPosts, getPostBySlug, getRelatedPosts, extractHeadings } from "@/lib/blog";
 
 export async function generateStaticParams() {
@@ -34,8 +35,34 @@ export default async function BlogPostPage({ params }: Props) {
   const headings = extractHeadings(post.content);
   const related = getRelatedPosts(post.slug, post.category);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Pixelab AI",
+      url: "https://pixelabai.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://pixelabai.com/logo.png"
+      }
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://pixelabai.com/blog/${post.slug}`
+    }
+  };
+
   return (
     <main className="min-h-screen p-8">
+      <JsonLd data={articleSchema} />
       <div className="max-w-6xl mx-auto">
         <div className="flex gap-10">
           <article className="flex-1 max-w-[720px]">
