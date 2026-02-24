@@ -4,7 +4,10 @@ const path = require('path');
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   webpack: (config) => {
-    config.resolve.alias['@'] = path.resolve(__dirname, './src');
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'),
+    };
     return config;
   },
 }

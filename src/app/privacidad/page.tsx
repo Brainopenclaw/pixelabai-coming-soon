@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+
+export const metadata: Metadata = {
+  title: "Política de Privacidad — Pixelab AI",
+  description: "Política de privacidad de Pixelab AI. Información sobre cómo recopilamos, usamos y protegemos tus datos personales.",
+  alternates: { canonical: "https://pixelabai.com/privacidad" },
+};
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://pixelabai.com" },
+  { name: "Privacidad", url: "https://pixelabai.com/privacidad" }
+];
+
 export default function PrivacidadPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] py-20 px-6">
+      <BreadcrumbJsonLd items={breadcrumbItems} />
       <article className="max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold mb-2">Política de Privacidad</h1>
         <p className="text-gray-400 mb-12">Última actualización: febrero 2025</p>

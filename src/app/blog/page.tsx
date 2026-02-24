@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BlogIndex from "@/components/blog/BlogIndex";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { getAllPosts } from "@/lib/blog";
 import AnimatedGrid, { GradientOrbs } from "@/components/effects/AnimatedGrid";
 
@@ -9,10 +10,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://pixelabai.com/blog" },
 };
 
+const breadcrumbItems = [
+  { name: "Home", url: "https://pixelabai.com" },
+  { name: "Blog", url: "https://pixelabai.com/blog" }
+];
+
 export default function BlogPage() {
   const posts = getAllPosts();
   return (
     <main className="relative min-h-screen bg-[#0a0a0a] pt-24 pb-16 px-6 overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbItems} />
       <AnimatedGrid />
       <GradientOrbs />
       <div className="relative z-10 max-w-5xl mx-auto">
