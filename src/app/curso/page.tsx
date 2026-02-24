@@ -156,10 +156,12 @@ export default function CursoPage() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6 }} className="max-w-lg mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Únete a la lista de espera 🎯</h2>
           <p className="text-gray-400 mb-8">Sé de los primeros en acceder al curso con un precio especial de lanzamiento. Sin compromiso.</p>
-          <form action="https://systeme.io/embedded/YOUR_FORM_ID" method="POST" className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input type="email" name="email" placeholder="tu@email.com" required aria-label="Tu email para la lista de espera" className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <button type="submit" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">Quiero acceso</button>
-          </form>
+          <a 
+            href="/#email-capture" 
+            className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Únete a la lista de espera →
+          </a>
           <p className="text-xs text-gray-500 mt-4">Solo te enviaremos información sobre el curso. Cero spam.</p>
         </motion.div>
       </section>

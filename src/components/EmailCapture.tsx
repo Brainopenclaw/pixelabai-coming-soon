@@ -1,10 +1,44 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function EmailCapture() {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      setErrorMsg("Ingresa un email válido");
+      setState("error");
+      return;
+    }
+    setState("loading");
+    setErrorMsg("");
+    
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setState("success");
+      } else {
+        setErrorMsg(data.error || "Algo salió mal");
+        setState("error");
+      }
+    } catch {
+      setErrorMsg("Error de conexión");
+      setState("error");
+    }
+  };
+
   return (
-    <section className="py-24 px-6">
+    <section id="email-capture" className="py-24 px-6 bg-gradient-to-b from-background to-background-secondary">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -15,38 +49,86 @@ export default function EmailCapture() {
           ¿Listo para empezar?
         </h2>
         <p className="text-text-muted mb-8">
-          Recibe contenido práctico sobre IA directamente en tu bandeja.
+          Descarga nuestra guía gratuita y aprende a transformar tu negocio con IA
         </p>
-        <form
-          action="https://systeme.io/embedded/156986/subscription"
-          method="POST"
-          className="flex flex-col gap-4 max-w-md mx-auto"
-        >
-          <input
-            type="text"
-            name="first_name"
-            placeholder="Tu nombre"
-            required
-            className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Tu email"
-            required
-            className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-text placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          <input type="hidden" name="tag" value="homepage-capture" />
-          <button
-            type="submit"
-            className="px-6 py-3 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition-opacity"
+
+        <AnimatePresence mode="wait">
+          {state === "success" ? (
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="flex flex-col items-center justify-center gap-4 py-8"
+            >
+              <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
+                <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p className="text-xl font-semibold text-green-400">
+                ¡Listo! Te enviamos la guía a tu email 📬
+              </p>
+              <p className="text-sm text-text-muted">
+                Revisa tu bandeja de entrada (y spam por si acaso)
+              </p>
+            </motion.div>
+          ) : (
+            <motion.form
+              key="form"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+            >
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (state === "error") setState("idle");
+                }}
+                placeholder="tu@email.com"
+                disabled={state === "loading"}
+                className="flex-1 h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-text placeholder:text-text-muted focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition-all disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={state === "loading"}
+                className="h-12 px-6 rounded-lg bg-gradient-to-r from-[#ff6b35] to-[#ffa500] text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2 min-w-[200px]"
+              >
+                {state === "loading" ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Enviando...
+                  </>
+                ) : (
+                  "Descarga la Guía Gratis"
+                )}
+              </button>
+            </motion.form>
+          )}
+        </AnimatePresence>
+
+        {state === "error" && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-red-400 text-sm mt-4"
           >
-            Quiero recibir contenido →
-          </button>
-        </form>
-        <p className="text-xs text-text-muted mt-4">
-          Sin spam. Solo contenido que te hace crecer.
-        </p>
+            {errorMsg}
+          </motion.p>
+        )}
+
+        {state !== "success" && (
+          <p className="text-xs text-text-muted mt-6">
+            Sin spam. Solo contenido que te hace crecer.
+          </p>
+        )}
       </motion.div>
     </section>
   );

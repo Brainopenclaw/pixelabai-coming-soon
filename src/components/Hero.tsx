@@ -34,7 +34,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="https://systeme.io/embedded/156986/subscription"
+            href="#email-capture"
             className="px-8 py-4 rounded-lg bg-primary text-white font-semibold text-lg hover:opacity-90 transition-opacity"
           >
             Descarga la Guía Gratis →

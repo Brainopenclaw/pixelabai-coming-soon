@@ -39,10 +39,12 @@ export default function RecursosPage() {
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.3 }} className="bg-white/5 border border-white/10 rounded-2xl p-8 max-w-lg mx-auto">
             <h3 className="text-xl font-semibold mb-2">📥 Descarga la Guía Gratis</h3>
             <p className="text-gray-400 text-sm mb-4">&quot;5 Formas de Usar IA en Tu Negocio Esta Semana&quot; — recibe la guía directo en tu email.</p>
-            <form action="https://systeme.io/embedded/YOUR_FORM_ID" method="POST" className="flex flex-col sm:flex-row gap-3">
-              <input type="email" name="email" placeholder="tu@email.com" required aria-label="Tu email" className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500" />
-              <button type="submit" className="px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-semibold rounded-lg hover:opacity-90 transition-opacity">Descargar</button>
-            </form>
+            <a 
+              href="/#email-capture" 
+              className="inline-block px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-semibold rounded-lg hover:opacity-90 transition-opacity"
+            >
+              Descargar Guía Gratis →
+            </a>
           </motion.div>
         </div>
       </section>
