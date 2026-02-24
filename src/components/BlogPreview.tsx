@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import type { BlogPostMeta } from "@/lib/blog";
 
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.15 } },
+};
+
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -16,41 +21,72 @@ export default function BlogPreview({ posts }: { posts: BlogPostMeta[] }) {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl md:text-4xl font-bold text-center mb-12"
+        className="text-3xl md:text-4xl font-bold text-center mb-4"
       >
         Últimos artículos
       </motion.h2>
-      <div className="grid md:grid-cols-3 gap-8">
-        {posts.map((post, i) => (
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+        className="text-text-muted text-center mb-12 max-w-2xl mx-auto"
+      >
+        Aprende sobre IA, herramientas y estrategias para tu negocio
+      </motion.p>
+      
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid md:grid-cols-3 gap-8"
+      >
+        {posts.map((post) => (
           <motion.a
             key={post.slug}
             href={`/blog/${post.slug}`}
             variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            whileHover={{ rotateY: 3, rotateX: -3, scale: 1.02 }}
-            className="block p-6 rounded-2xl bg-surface border border-white/5 hover:border-primary/30 transition-colors"
-            style={{ transformPerspective: 800 }}
+            className="group block overflow-hidden rounded-2xl bg-surface border border-white/5 hover:border-primary/30 transition-all duration-300"
           >
-            <div className="w-full h-40 rounded-lg bg-white/5 mb-4 flex items-center justify-center text-text-muted text-sm">
-              📷 {post.title}
+            {/* Image area with zoom on hover */}
+            <div className="relative w-full h-48 bg-gradient-to-br from-white/10 to-white/5 overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center text-text-muted text-sm font-medium group-hover:scale-110 transition-transform duration-500">
+                <span className="text-4xl opacity-50">📄</span>
+              </div>
             </div>
-            <time className="text-xs text-text-muted">{post.date}</time>
-            <h3 className="text-lg font-semibold mt-1 mb-2">{post.title}</h3>
-            <p className="text-sm text-text-muted">{post.excerpt}</p>
+            
+            {/* Content */}
+            <div className="p-6">
+              <time className="text-xs text-primary font-medium">
+                {post.date}
+              </time>
+              <h3 className="text-lg font-semibold mt-2 mb-2 group-hover:text-primary transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-sm text-text-muted leading-relaxed line-clamp-2">
+                {post.excerpt}
+              </p>
+            </div>
           </motion.a>
         ))}
-      </div>
-      <div className="text-center mt-10">
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.4 }}
+        className="text-center mt-12"
+      >
         <Link
           href="/blog"
-          className="text-primary font-semibold hover:underline"
+          className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
         >
-          Ver todos los artículos →
+          Ver todos los artículos
+          <span>→</span>
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 }

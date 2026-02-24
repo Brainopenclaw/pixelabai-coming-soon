@@ -28,49 +28,48 @@ function CountUp({
   }, [isInView, target]);
 
   return (
-    <span ref={ref} className="text-4xl font-bold text-primary">
+    <span ref={ref} className="text-5xl md:text-6xl font-bold text-gradient-orange">
       {count}
       {suffix}
     </span>
   );
 }
 
+const stats = [
+  { value: 10, suffix: "+", label: "años en tech" },
+  { value: 7, suffix: "", label: "guías publicadas" },
+  { value: 500, suffix: "+", label: "emprendedores" },
+];
+
 export default function SocialProof() {
   return (
-    <section className="py-24 px-6 max-w-4xl mx-auto">
+    <section className="relative py-24 px-6 max-w-6xl mx-auto">
+      {/* Subtle orange gradient accent line at top */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+      
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="rounded-2xl bg-surface border border-white/5 p-10 md:p-14"
+        transition={{ duration: 0.7 }}
+        className="rounded-2xl bg-gradient-to-br from-surface to-surface/80 border border-white/5 p-12 md:p-16"
       >
-        <div className="flex flex-col md:flex-row gap-10 items-center">
-          <div className="w-32 h-32 rounded-full bg-white/10 flex-shrink-0 flex items-center justify-center text-4xl">
-            👨‍💻
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold mb-2">Jorge</h3>
-            <p className="text-text-muted mb-4">
-              Emprendedor, consultor tecnológico y apasionado por la
-              inteligencia artificial aplicada a negocios reales.
-            </p>
-            <div className="flex gap-8 mb-6">
-              <div className="text-center">
-                <CountUp target={10} suffix="+" />
-                <p className="text-sm text-text-muted mt-1">años en tech</p>
-              </div>
-              <div className="text-center">
-                <CountUp target={500} suffix="+" />
-                <p className="text-sm text-text-muted mt-1">
-                  emprendedores ayudados
-                </p>
-              </div>
-            </div>
-            <blockquote className="border-l-4 border-primary pl-4 italic text-text-muted">
-              &ldquo;Mi misión es democratizar la IA para que cualquier
-              emprendedor pueda usarla sin complicaciones.&rdquo;
-            </blockquote>
-          </div>
+        <div className="grid md:grid-cols-3 gap-12 text-center">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              className="flex flex-col items-center"
+            >
+              <CountUp target={stat.value} suffix={stat.suffix} />
+              <p className="text-text-muted mt-3 font-medium">
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </section>
