@@ -16,11 +16,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: "Artículo" };
+  
+  const ogImage = `https://pixelabai.com${post.image}`;
+  
   return {
     title: `${post.title} — Pixelab AI`,
     description: post.description,
     alternates: { canonical: `https://pixelabai.com/blog/${post.slug}` },
-    openGraph: { title: post.title, description: post.description, type: "article" },
+    openGraph: { 
+      title: post.title, 
+      description: post.description, 
+      type: "article",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.imageAlt || post.title }],
+      url: `https://pixelabai.com/blog/${post.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [ogImage],
+    },
   };
 }
 
@@ -40,6 +55,7 @@ export default async function BlogPostPage({ params }: Props) {
     "@type": "Article",
     headline: post.title,
     description: post.description,
+    image: `https://pixelabai.com${post.image}`,
     datePublished: post.date,
     author: {
       "@type": "Person",
