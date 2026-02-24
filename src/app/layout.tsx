@@ -33,8 +33,8 @@ const organizationSchema = {
   url: "https://pixelabai.com",
   description: "Aprende a usar la Inteligencia Artificial para transformar tu negocio. Guías prácticas, herramientas y cursos en español.",
   sameAs: [
-    "https://instagram.com/pixelabai",
-    "https://tiktok.com/@pixelabai",
+    "https://www.instagram.com/jorgeailab",
+    "https://www.tiktok.com/@jorgeailab",
     "https://youtube.com/@pixelabai"
   ],
   contactPoint: {

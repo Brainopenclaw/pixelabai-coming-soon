@@ -59,7 +59,7 @@ export default function Footer() {
             </h3>
             <div className="flex gap-4 mb-6">
               <a
-                href="https://instagram.com/pixelabai"
+                href="https://www.instagram.com/jorgeailab"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center"
@@ -77,7 +77,7 @@ export default function Footer() {
                 <Youtube className="w-5 h-5 text-text-muted" />
               </a>
               <a
-                href="https://tiktok.com/@pixelabai"
+                href="https://www.tiktok.com/@jorgeailab"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center text-text-muted text-lg font-bold"

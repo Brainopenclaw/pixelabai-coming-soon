@@ -18,7 +18,7 @@ const milestones = [
 const socials = [
   { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/in/jorgedearmas" },
   { name: "Twitter", icon: Twitter, href: "https://twitter.com/jorgedearmas" },
-  { name: "Instagram", icon: Instagram, href: "https://instagram.com/pixelabai" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/jorgeailab" },
   { name: "YouTube", icon: Youtube, href: "https://youtube.com/@pixelabai" },
 ];
 
@@ -29,8 +29,8 @@ const personSchema = {
   jobTitle: "Fundador de Pixelab AI",
   url: "https://pixelabai.com/sobre-mi",
   sameAs: [
-    "https://instagram.com/pixelabai",
-    "https://tiktok.com/@pixelabai"
+    "https://www.instagram.com/jorgeailab",
+    "https://www.tiktok.com/@jorgeailab"
   ]
 };
 

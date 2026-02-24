@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import type { BlogPostMeta } from "@/lib/blog";
 
 const container = {
@@ -51,9 +52,19 @@ export default function BlogPreview({ posts }: { posts: BlogPostMeta[] }) {
           >
             {/* Image area with zoom on hover */}
             <div className="relative w-full h-48 bg-gradient-to-br from-white/10 to-white/5 overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center text-text-muted text-sm font-medium group-hover:scale-110 transition-transform duration-500">
-                <span className="text-4xl opacity-50">📄</span>
-              </div>
+              {post.image ? (
+                <Image
+                  src={post.image}
+                  alt={post.imageAlt || post.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-text-muted text-sm font-medium">
+                  <span className="text-4xl opacity-50">📄</span>
+                </div>
+              )}
             </div>
             
             {/* Content */}
