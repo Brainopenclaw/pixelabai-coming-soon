@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const GUIDE_PDF_URL = "https://d1yei2z3i6k35z.cloudfront.net/16522596/6998e7aec38e8_GuiadeinstalaciondelAsistenteIA.pdf";
+
 export default function EmailCapture() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -49,7 +51,7 @@ export default function EmailCapture() {
           ¿Listo para empezar?
         </h2>
         <p className="text-text-muted mb-8">
-          Descarga nuestra guía gratuita y aprende a transformar tu negocio con IA
+          Descarga mi guía gratis y configura tu <strong className="text-text">asistente de IA</strong> en menos de 1 hora
         </p>
 
         <AnimatePresence mode="wait">
@@ -67,10 +69,24 @@ export default function EmailCapture() {
                 </svg>
               </div>
               <p className="text-xl font-semibold text-green-400">
-                ¡Listo! Te enviamos la guía a tu email 📬
+                ¡Tu guía está en camino! 📬
               </p>
-              <p className="text-sm text-text-muted">
-                Revisa tu bandeja de entrada (y spam por si acaso)
+              <p className="text-sm text-text-muted mb-2">
+                También te la enviamos a tu email. Revisa tu bandeja de entrada.
+              </p>
+              <a
+                href={GUIDE_PDF_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-[#ff6b35] to-[#ffa500] text-white font-semibold text-lg hover:opacity-90 transition-opacity"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Descargar Guía PDF
+              </a>
+              <p className="text-xs text-text-muted mt-2">
+                ¿No quieres esperar? Descárgala ahora mismo 👆
               </p>
             </motion.div>
           ) : (
@@ -107,7 +123,7 @@ export default function EmailCapture() {
                     Enviando...
                   </>
                 ) : (
-                  "Descarga la Guía Gratis"
+                  "Obtén Tu Guía Gratis"
                 )}
               </button>
             </motion.form>
