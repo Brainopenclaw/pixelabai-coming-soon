@@ -2,21 +2,21 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Linkedin, Twitter, Instagram, Youtube, Download } from "lucide-react";
+import { Linkedin, Instagram, Youtube, Download } from "lucide-react";
 import Link from "next/link";
 
 const milestones = [
-  { year: "2015", title: "Inicio en Marketing Digital", description: "Primeros pasos en el mundo del marketing digital, ayudando a pequeños negocios a establecer su presencia online." },
-  { year: "2018", title: "Especialización en Automatización", description: "Descubrí el poder de la automatización para escalar negocios sin aumentar costes. Ayudé a más de 50 empresas a optimizar sus procesos." },
-  { year: "2020", title: "Consultoría de Transformación Digital", description: "Lideré proyectos de transformación digital para empresas en Latinoamérica y España durante la pandemia." },
-  { year: "2023", title: "Adopción de IA en Negocios", description: "Con la llegada de ChatGPT y las nuevas herramientas de IA, me especialicé en ayudar a emprendedores a integrar IA en sus operaciones diarias." },
-  { year: "2024", title: "Nace Pixelab AI", description: "Creé Pixelab AI con la misión de democratizar el acceso a la inteligencia artificial para emprendedores hispanohablantes." },
+  { year: "2014", title: "Inicio en Tecnología Empresarial", description: "Comencé mi carrera en tecnología empresarial, construyendo y escalando sistemas digitales para organizaciones." },
+  { year: "2018", title: "Liderazgo en Transformación Digital", description: "Lideré proyectos de transformación digital en entornos empresariales, implementando soluciones tecnológicas escalables." },
+  { year: "2022", title: "Inmersión en IA y Automatización", description: "Me sumergí profundamente en inteligencia artificial y automatización, explorando cómo estas tecnologías podían revolucionar operaciones empresariales." },
+  { year: "2024", title: "Construcción de Agentes de IA", description: "Comencé a construir agentes de IA y sistemas de automatización avanzados para resolver problemas empresariales complejos." },
+  { year: "2025", title: "Fundación de Pixelab AI", description: "Fundé Pixelab AI con la misión de democratizar el acceso a la inteligencia artificial para emprendedores hispanohablantes." },
 ];
 
 const socials = [
   { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/in/jorgedearmas" },
-  { name: "Twitter", icon: Twitter, href: "https://twitter.com/jorgedearmas" },
   { name: "Instagram", icon: Instagram, href: "https://instagram.com/pixelabai" },
+  { name: "TikTok", icon: Youtube, href: "https://tiktok.com/@pixelabai" },
   { name: "YouTube", icon: Youtube, href: "https://youtube.com/@pixelabai" },
 ];
 
@@ -47,7 +47,7 @@ export default function SobreMiPage() {
           </motion.div>
           <div className="text-center md:text-left">
             <motion.h1 initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }} className="text-4xl md:text-5xl font-bold mb-3">Jorge De Armas</motion.h1>
-            <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.1 }} className="text-xl text-orange-400 font-medium mb-4">Fundador de Pixelab AI · Consultor de IA para Negocios</motion.p>
+            <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.1 }} className="text-xl text-orange-400 font-medium mb-4">Fundador de Pixelab AI · Tecnólogo Empresarial · Miami, FL</motion.p>
             <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.2 }} className="text-gray-400 leading-relaxed max-w-xl">
               Ayudo a emprendedores hispanohablantes a usar la inteligencia artificial para trabajar menos, producir más y escalar sus negocios de forma inteligente.
             </motion.p>
@@ -60,7 +60,7 @@ export default function SobreMiPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Mi Historia 📖</h2>
           <div className="space-y-6 text-gray-400 leading-relaxed">
             <p>Todo empezó cuando me di cuenta de que los emprendedores en Latinoamérica y España estaban perdiendo una oportunidad enorme. La inteligencia artificial estaba transformando negocios en todo el mundo, pero la mayoría del contenido educativo estaba en inglés, era demasiado técnico, o no tenía aplicación práctica para negocios reales.</p>
-            <p>Después de años trabajando en marketing digital y ayudando a empresas a adoptar tecnología, entendí algo clave: <span className="text-white font-medium">no necesitas ser programador para aprovechar la IA</span>. Lo que necesitas es alguien que te muestre cómo aplicarla a tu situación específica.</p>
+            <p>Después de más de 10 años trabajando en tecnología empresarial — construyendo sistemas, liderando transformaciones digitales y automatizando procesos complejos — entendí algo clave: <span className="text-white font-medium">no necesitas ser programador para aprovechar la IA</span>. Lo que necesitas es alguien que te muestre cómo aplicarla a tu situación específica.</p>
             <p>Eso es exactamente lo que hago. A través de Pixelab AI, comparto herramientas, estrategias y recursos prácticos para que cualquier emprendedor pueda usar IA en su día a día — desde crear contenido hasta automatizar procesos completos de su negocio.</p>
           </div>
         </motion.div>
