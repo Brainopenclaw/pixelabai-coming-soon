@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Download, ExternalLink, Sparkles, BookOpen, Wrench } from "lucide-react";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 const tools = [
   { name: "ChatGPT", description: "Asistente de IA conversacional para generar contenido, ideas y resolver problemas de negocio.", badge: "Gratis / Pro", link: "https://chat.openai.com" },
@@ -22,11 +23,17 @@ const templates = [
   { title: "Kit de Prompts para Email Marketing", description: "Colección de prompts para escribir secuencias de email que convierten.", icon: Sparkles },
 ];
 
+const breadcrumbItems = [
+  { name: "Home", url: "https://pixelabai.com" },
+  { name: "Recursos", url: "https://pixelabai.com/recursos" }
+];
+
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function RecursosPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
+      <BreadcrumbJsonLd items={breadcrumbItems} />
       <section className="relative py-24 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent" />
         <div className="relative z-10 max-w-3xl mx-auto">

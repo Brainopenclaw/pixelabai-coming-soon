@@ -4,6 +4,7 @@ import MdxContent from "@/components/blog/MdxContent";
 import TableOfContents from "@/components/blog/TableOfContents";
 import EmailCapture from "@/components/blog/EmailCapture";
 import JsonLd from "@/components/JsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { getAllPosts, getPostBySlug, getRelatedPosts, extractHeadings } from "@/lib/blog";
 
 export async function generateStaticParams() {
@@ -18,9 +19,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: "Artículo" };
   return {
     title: `${post.title} — Pixelab AI`,
-    description: post.description,
+    description: post.excerpt,
     alternates: { canonical: `https://pixelabai.com/blog/${post.slug}` },
-    openGraph: { title: post.title, description: post.description, type: "article" },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [{ url: post.image }],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
   };
 }
 
@@ -39,30 +50,52 @@ export default async function BlogPostPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
-    description: post.description,
+    description: post.excerpt,
+    image: `https://pixelabai.com${post.image}`,
     datePublished: post.date,
+    dateModified: post.date,
     author: {
       "@type": "Person",
-      name: post.author
+      name: post.author,
+      url: "https://pixelabai.com/sobre-mi"
     },
     publisher: {
       "@type": "Organization",
       name: "Pixelab AI",
-      url: "https://pixelabai.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://pixelabai.com/logo.png"
-      }
+      url: "https://pixelabai.com"
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://pixelabai.com/blog/${post.slug}`
-    }
+    mainEntityOfPage: `https://pixelabai.com/blog/${post.slug}`,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".article-excerpt", "h1"]
+    },
+    inLanguage: post.lang || "es"
   };
+
+  const faqSchema = post.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: post.faqs.map((faq: { question: string; answer: string }) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  } : null;
+
+  const breadcrumbItems = [
+    { name: "Home", url: "https://pixelabai.com" },
+    { name: "Blog", url: "https://pixelabai.com/blog" },
+    { name: post.title, url: `https://pixelabai.com/blog/${post.slug}` }
+  ];
 
   return (
     <main className="min-h-screen p-8">
       <JsonLd data={articleSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
+      <BreadcrumbJsonLd items={breadcrumbItems} />
       <div className="max-w-6xl mx-auto">
         <div className="flex gap-10">
           <article className="flex-1 max-w-[720px]">
@@ -73,7 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs">{post.category}</span>
               </div>
               <h1 className="text-4xl font-bold text-text mb-4">{post.title}</h1>
-              <p className="text-text-muted text-lg mb-4">{post.description}</p>
+              <p className="article-excerpt text-text-muted text-lg mb-4">{post.description}</p>
               <div className="flex items-center gap-4 text-sm text-text-muted">
                 <span>{post.author}</span><span>·</span><time>{post.date}</time><span>·</span><span>{post.readTime}</span>
               </div>
