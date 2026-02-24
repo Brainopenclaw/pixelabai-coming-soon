@@ -1,3 +1,5 @@
+"use client";
+
 interface JsonLdProps {
   data: Record<string, any>;
 }
