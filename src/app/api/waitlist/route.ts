@@ -36,10 +36,12 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         email,
-        fields: {
-          first_name: trimmedFirstName,
-        },
-        tags: ['course-waitlist'],
+        fields: [
+          { slug: 'first_name', value: trimmedFirstName },
+        ],
+        tags: [
+          { name: 'course-waitlist' },
+        ],
       }),
     })
 
