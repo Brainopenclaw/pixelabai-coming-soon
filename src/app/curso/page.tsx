@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Clock, CheckCircle2, AlertCircle, Zap } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
@@ -83,6 +81,92 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+function WaitlistForm() {
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setError("");
+
+    if (!email) {
+      setError("El email es obligatorio.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Por favor ingresa un email válido.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, firstName: firstName || undefined }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Error al registrarte. Inténtalo de nuevo.");
+      }
+      setSuccess(true);
+      setEmail("");
+      setFirstName("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error al registrarte. Inténtalo de nuevo.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  if (success) {
+    return (
+      <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6 text-center">
+        <CheckCircle2 className="w-8 h-8 text-green-400 mx-auto mb-3" />
+        <p className="text-green-300 font-medium">
+          ¡Gracias! Te avisaremos cuando el curso esté listo con el precio especial de lanzamiento.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+      <input
+        type="text"
+        placeholder="Tu nombre (opcional)"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-colors"
+      />
+      <input
+        type="email"
+        placeholder="Tu email *"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-colors"
+      />
+      {error && (
+        <p className="text-red-400 text-sm flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          {error}
+        </p>
+      )}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {loading ? "Registrando..." : "Únete a la lista de espera →"}
+      </button>
+    </form>
+  );
+}
+
 export default function CursoPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
@@ -158,11 +242,7 @@ export default function CursoPage() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6 }} className="max-w-lg mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Únete a la lista de espera 🎯</h2>
           <p className="text-gray-400 mb-8">Sé de los primeros en acceder al curso con un precio especial de lanzamiento. Sin compromiso.</p>
-          <Link href="/#email-capture" 
-            className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
-          >
-            Únete a la lista de espera →
-          </Link>
+          <WaitlistForm />
           <p className="text-xs text-gray-500 mt-4">Solo te enviaremos información sobre el curso. Cero spam.</p>
         </motion.div>
       </section>
