@@ -96,7 +96,7 @@ export default function EmailCapture() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+              className="flex flex-col gap-3 max-w-lg mx-auto w-full"
             >
               <input
                 type="email"
@@ -107,12 +107,12 @@ export default function EmailCapture() {
                 }}
                 placeholder="tu@email.com"
                 disabled={state === "loading"}
-                className="flex-1 h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-text placeholder:text-text-muted focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition-all disabled:opacity-50"
+                className="w-full h-14 px-5 text-base rounded-xl bg-white/5 border border-white/10 text-text placeholder:text-text-muted focus:outline-none focus:border-[#ff6b35] focus:ring-2 focus:ring-[#ff6b35]/50 transition-all disabled:opacity-50"
               />
               <button
                 type="submit"
                 disabled={state === "loading"}
-                className="h-12 px-6 rounded-lg bg-gradient-to-r from-[#ff6b35] to-[#ffa500] text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2 min-w-[200px]"
+                className="w-full h-14 px-6 rounded-xl bg-gradient-to-r from-[#ff6b35] to-[#ffa500] text-white font-semibold text-base hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {state === "loading" ? (
                   <>

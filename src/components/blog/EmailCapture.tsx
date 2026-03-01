@@ -71,7 +71,7 @@ export default function EmailCapture({
           <p className="text-xs text-text-muted">También te la enviamos a tu email.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full">
           <input 
             type="email" 
             value={email}
@@ -82,12 +82,12 @@ export default function EmailCapture({
             placeholder="tu@email.com" 
             required 
             disabled={state === "loading"}
-            className="flex-1 px-4 py-3 rounded-lg bg-surface border border-white/10 text-text placeholder:text-text-muted focus:outline-none focus:border-primary disabled:opacity-50" 
+            className="w-full h-14 px-5 text-base rounded-xl bg-surface border border-white/10 text-text placeholder:text-text-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/30 disabled:opacity-50" 
           />
           <button 
             type="submit"
             disabled={state === "loading"}
-            className="px-6 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full h-14 px-6 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {state === "loading" ? (
               <>

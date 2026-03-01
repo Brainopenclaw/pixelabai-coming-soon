@@ -105,7 +105,7 @@ export default function CTASection() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit}
-                  className="flex flex-col sm:flex-row gap-4"
+                  className="flex flex-col gap-4 w-full"
                 >
                   <input
                     type="email"
@@ -116,12 +116,12 @@ export default function CTASection() {
                     }}
                     placeholder="tu@email.com"
                     disabled={state === "loading"}
-                    className="flex-1 px-6 py-4 rounded-lg bg-surface border border-white/10 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-text placeholder:text-text-muted transition-all disabled:opacity-50"
+                    className="w-full h-14 px-5 text-base rounded-xl bg-surface border border-white/10 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-text placeholder:text-text-muted transition-all disabled:opacity-50"
                   />
                   <button
                     type="submit"
                     disabled={state === "loading"}
-                    className="px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-semibold text-lg hover:shadow-glow-orange transition-all whitespace-nowrap disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full h-14 px-8 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold text-lg hover:shadow-glow-orange transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {state === "loading" ? (
                       <>
