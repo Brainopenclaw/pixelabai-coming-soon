@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     description: "Aprende a usar la IA para transformar tu negocio. Guías prácticas, herramientas y cursos en español.",
     images: ["https://pixelabai.com/blog/ia-para-emprendedores.jpg"],
   },
+  verification: {
+    google: "RUEe9uoBgrXatygAO6enWdIN9j5xxiNrpjs5leiQ_z8",
+  },
   alternates: {
     canonical: "https://pixelabai.com",
   },
