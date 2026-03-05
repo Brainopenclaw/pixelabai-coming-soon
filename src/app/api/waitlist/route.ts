@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
 
-    const { email, firstName } = await request.json()
+    const { email, firstName, source } = await request.json()
 
     // Validate email with proper regex
     if (!email || !EMAIL_REGEX.test(email)) {
@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
         email,
         fields: [
           { slug: 'first_name', value: trimmedFirstName },
+          ...(source ? [{ slug: 'website', value: `source:${source}` }] : []),
         ],
       }),
     })

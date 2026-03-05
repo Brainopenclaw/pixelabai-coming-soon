@@ -5,7 +5,7 @@ const SYSTEME_API_URL = 'https://api.systeme.io/api/contacts'
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json()
+    const { email, source } = await request.json()
     if (!email || !email.includes('@')) {
       return NextResponse.json({ error: 'Email inválido' }, { status: 400 })
     }
@@ -15,7 +15,11 @@ export async function POST(request: NextRequest) {
         'X-API-Key': SYSTEME_API_KEY,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, locale: 'es' }),
+      body: JSON.stringify({
+        email,
+        locale: 'es',
+        ...(source ? { fields: [{ slug: 'website', value: `source:${source}` }] } : {}),
+      }),
     })
     if (res.ok) {
       return NextResponse.json({ success: true })

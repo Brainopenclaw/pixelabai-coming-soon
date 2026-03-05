@@ -24,11 +24,15 @@ export default function EmailCapture() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, source: 'homepage' }),
       });
       const data = await res.json();
       if (data.success) {
         setState("success");
+        // GA4 conversion event
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'form_submit', { event_category: 'lead', event_label: 'homepage_guide', source: 'homepage' });
+        }
       } else {
         setErrorMsg(data.error || "Algo salió mal");
         setState("error");

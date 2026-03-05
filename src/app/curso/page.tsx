@@ -106,13 +106,17 @@ function WaitlistForm() {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, firstName: firstName || undefined }),
+        body: JSON.stringify({ email, firstName: firstName || undefined, source: 'curso' }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Error al registrarte. Inténtalo de nuevo.");
       }
       setSuccess(true);
+      // GA4 conversion event
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'form_submit', { event_category: 'lead', event_label: 'curso_waitlist', source: 'curso' });
+      }
       setEmail("");
       setFirstName("");
     } catch (err) {
