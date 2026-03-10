@@ -56,16 +56,16 @@ export default function EmailCapture({
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <span className="font-semibold">¡Tu guía está en camino! 📬</span>
+            <span className="font-semibold">¡Listo! Tu acceso está aquí.</span>
           </div>
           <a
-            href="https://bio.pixelabai.com"
+            href="https://bio.pixelabai.com/thank-you-free-guide"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-semibold transition-colors w-fit"
             style={{ background: "#00E5FF", color: "#0a0f1e" }}
           >
-            Acceder a tu contenido →
+            Ver la guía completa por $17
           </a>
           <p className="text-xs text-text-muted">También te la enviamos a tu email.</p>
         </div>

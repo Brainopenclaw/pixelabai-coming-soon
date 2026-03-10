@@ -3,7 +3,7 @@ import ValueProps from "@/components/ValueProps";
 import BlogPreview from "@/components/BlogPreview";
 import SocialProof from "@/components/SocialProof";
 import EmailCapture from "@/components/EmailCapture";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 import { getAllPosts } from "@/lib/blog";
 
 export default function Home() {

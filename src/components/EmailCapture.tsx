@@ -78,16 +78,16 @@ export default function EmailCapture() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <p className="text-xl font-semibold text-green-400">¡Tu guía está en camino! 📬</p>
+                <p className="text-xl font-semibold text-green-400">¡Listo! Tu acceso está aquí.</p>
                 <p className="text-sm text-text-muted mb-2">Revisa tu bandeja de entrada.</p>
                 <a
-                  href="https://bio.pixelabai.com"
+                  href="https://bio.pixelabai.com/thank-you-free-guide"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-black text-lg transition-all"
                   style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.35)" }}
                 >
-                  Acceder a tu contenido →
+                  Ver la guía completa por $17
                 </a>
               </motion.div>
             ) : (
@@ -132,7 +132,7 @@ export default function EmailCapture() {
                       Enviando...
                     </>
                   ) : (
-                    "Acceder Gratis →"
+                    "Acceder Gratis"
                   )}
                 </button>
               </motion.form>

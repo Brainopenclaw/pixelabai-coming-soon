@@ -44,12 +44,12 @@ export default function RecursosPage() {
             Herramientas, plantillas y guías para que empieces a usar la inteligencia artificial en tu negocio hoy mismo.
           </motion.p>
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.3 }} className="bg-[rgba(255,255,255,0.03)] border border-[rgba(0,229,255,0.2)] border-t-[3px] border-t-[#00E5FF] rounded-2xl p-8 max-w-lg mx-auto">
-            <h3 className="text-xl font-semibold mb-2">📥 5 prompts para hacer el trabajo de 3</h3>
+            <h3 className="text-xl font-semibold mb-2">Descarga el primer módulo gratis</h3>
             <p className="text-gray-400 text-sm mb-4">Descarga gratis y empieza a usar IA en tu negocio hoy mismo.</p>
             <a href="https://bio.pixelabai.com" target="_blank" rel="noopener noreferrer"
               className="inline-block px-8 py-4 bg-[#00E5FF] text-[#0a0f1e] font-black rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_28px_rgba(0,229,255,0.35)]"
             >
-              Descargar Guía Gratis →
+              Descargar Guía Gratis
             </a>
           </motion.div>
         </div>
@@ -57,7 +57,7 @@ export default function RecursosPage() {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">🛠️ Herramientas Recomendadas</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Herramientas Recomendadas</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Las mejores herramientas de IA que uso y recomiendo para emprendedores y negocios.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -77,7 +77,7 @@ export default function RecursosPage() {
       <section className="py-20 px-6 bg-white/[0.02]">
         <div className="max-w-5xl mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">📋 Plantillas y Prompts</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Plantillas y Prompts</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Recursos descargables para que saques el máximo provecho de la IA desde el primer día.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -98,7 +98,7 @@ export default function RecursosPage() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6 }} className="max-w-2xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">¿Listo para el siguiente nivel?</h2>
           <p className="text-gray-400 mb-8">Construye un ChatGPT que conoce tu negocio, recuerda todo y trabaja solo. La guía completa por $17.</p>
-          <a href="https://bio.pixelabai.com/order-form" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-4 font-black rounded-xl transition-opacity hover:opacity-90" style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.45)" }}>Ver la guía completa $17 →</a>
+          <a href="https://bio.pixelabai.com/order-form" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-4 font-black rounded-xl transition-opacity hover:opacity-90" style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.45)" }}>Ver la guía completa $17</a>
         </motion.div>
       </section>
     </main>

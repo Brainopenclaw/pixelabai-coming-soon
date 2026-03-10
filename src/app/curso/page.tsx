@@ -78,7 +78,7 @@ export default function CursoPage() {
             className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full"
             style={{ background: "rgba(0,229,255,0.08)", border: "1px solid rgba(0,229,255,0.2)" }}
           >
-            <span style={{ color: "#00E5FF" }} className="text-sm font-medium">🤖 Solo $17 — Acceso Inmediato</span>
+            <span style={{ color: "#00E5FF" }} className="text-sm font-medium">Solo $17 · Acceso Inmediato</span>
           </motion.div>
 
           <motion.h1
@@ -125,22 +125,12 @@ export default function CursoPage() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
             >
-              Obtener AIOS por $17 →
+              Obtener la guía por $17
             </a>
-            <a
-              href="https://bio.pixelabai.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium transition-all"
-              style={{ color: "#9ca3af" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#00E5FF"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#9ca3af"; }}
-            >
-              O descarga 5 prompts gratis primero →
-            </a>
+
           </motion.div>
 
-          <p className="mt-4 text-sm text-text-muted">✅ Garantía 30 días · Acceso inmediato · Pago seguro</p>
+          <p className="mt-4 text-sm" style={{ color: "#00E5FF" }}>✓ Garantía 7 días · Acceso inmediato · Pago seguro</p>
         </div>
       </section>
 
@@ -216,9 +206,9 @@ export default function CursoPage() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; }}
             >
-              Sí, quiero AIOS por $17 →
+              Obtener la guía por $17
             </a>
-            <p className="text-center text-xs text-text-muted mt-3">Garantía de devolución 30 días. Sin riesgo.</p>
+            <p className="text-center text-xs text-text-muted mt-3">Garantía de devolución 7 días. Sin riesgo.</p>
           </div>
         </div>
       </section>
@@ -249,7 +239,7 @@ export default function CursoPage() {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
           >
-            Obtener AIOS por $17 →
+            Obtener la guía por $17
           </a>
           <p className="mt-4 text-sm text-text-muted">
             ¿Quieres probar primero?{" "}
@@ -259,7 +249,7 @@ export default function CursoPage() {
               rel="noopener noreferrer"
               style={{ color: "#00E5FF" }}
             >
-              Descarga 5 prompts gratis →
+              Descarga el primer módulo gratis
             </a>
           </p>
         </div>

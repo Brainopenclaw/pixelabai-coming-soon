@@ -35,7 +35,6 @@ export default function Hero() {
           className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full backdrop-blur-sm"
           style={{ border: "1px solid rgba(0,229,255,0.2)", background: "rgba(0,229,255,0.08)" }}
         >
-          <span className="text-xl">🚀</span>
           <span className="text-sm font-medium" style={{ color: "#00E5FF" }}>
             La guía #1 de IA en español
           </span>
@@ -79,7 +78,7 @@ export default function Hero() {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
           >
-            <span className="relative z-10">Empieza gratis — Descarga el primer módulo →</span>
+            <span className="relative z-10">Empieza gratis — Descarga el primer módulo</span>
           </a>
           <a
             href="https://bio.pixelabai.com/order-form"
@@ -88,7 +87,7 @@ export default function Hero() {
             className="px-8 py-4 rounded-xl font-semibold text-lg transition-all"
             style={{ border: "1px solid rgba(0,229,255,0.2)", color: "#00E5FF" }}
           >
-            Ver la guía completa $17 →
+            Ver la guía completa $17
           </a>
         </motion.div>
 
