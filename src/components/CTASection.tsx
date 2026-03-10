@@ -40,10 +40,10 @@ export default function CTASection() {
               style={{
                 background: "#00E5FF",
                 color: "#0a0f1e",
-                boxShadow: "0 0 28px rgba(0,229,255,0.35)",
+                boxShadow: "0 0 28px rgba(0,229,255,0.20)",
               }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.20)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
             >
               Empieza gratis
             </a>

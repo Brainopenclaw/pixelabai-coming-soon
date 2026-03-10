@@ -120,7 +120,7 @@ export default function SobreMiPage() {
             ))}
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6, delay: 0.2 }}>
-            <a href="https://bio.pixelabai.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-[#00E5FF] text-[#0a0f1e] font-black rounded-xl hover:opacity-90 transition-opacity shadow-[0_0_28px_rgba(0,229,255,0.35)]">
+            <a href="https://bio.pixelabai.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-[#00E5FF] text-[#0a0f1e] font-black rounded-xl hover:opacity-90 transition-opacity shadow-[0_0_28px_rgba(0,229,255,0.20)]">
               <Download className="w-5 h-5" />Empieza gratis
             </a>
           </motion.div>

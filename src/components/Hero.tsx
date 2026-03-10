@@ -69,14 +69,14 @@ export default function Hero() {
             href="https://bio.pixelabai.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative px-8 py-4 rounded-xl font-black text-lg transition-all overflow-hidden"
+            className="group relative px-8 py-4 rounded-xl font-black text-lg uppercase tracking-wide transition-all overflow-hidden"
             style={{
               background: "#00E5FF",
               color: "#0a0f1e",
-              boxShadow: "0 0 28px rgba(0,229,255,0.35)",
+              boxShadow: "0 0 28px rgba(0,229,255,0.20)",
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.20)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
           >
             <span className="relative z-10">Empieza gratis</span>
           </a>
@@ -84,7 +84,7 @@ export default function Hero() {
             href="https://bio.pixelabai.com/thank-you-free-guide"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 rounded-xl font-semibold text-lg transition-all"
+            className="px-8 py-4 rounded-xl font-semibold text-lg uppercase tracking-wide transition-all"
             style={{ border: "1px solid rgba(0,229,255,0.2)", color: "#00E5FF" }}
           >
             Guía completa por $17

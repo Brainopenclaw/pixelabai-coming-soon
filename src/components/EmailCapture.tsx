@@ -85,7 +85,7 @@ export default function EmailCapture() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-black text-lg transition-all"
-                  style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.35)" }}
+                  style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.20)" }}
                 >
                   Ver la guía completa por $17
                 </a>
@@ -121,7 +121,7 @@ export default function EmailCapture() {
                   type="submit"
                   disabled={state === "loading"}
                   className="w-full h-14 px-6 font-black text-base transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-                  style={{ background: "#00E5FF", color: "#0a0f1e", borderRadius: "12px", boxShadow: "0 0 28px rgba(0,229,255,0.35)" }}
+                  style={{ background: "#00E5FF", color: "#0a0f1e", borderRadius: "12px", boxShadow: "0 0 28px rgba(0,229,255,0.20)" }}
                 >
                   {state === "loading" ? (
                     <>
