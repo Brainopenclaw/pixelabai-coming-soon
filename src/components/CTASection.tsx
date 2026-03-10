@@ -45,10 +45,10 @@ export default function CTASection() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
             >
-              Empieza gratis — Primer módulo
+              Empieza gratis
             </a>
             <a
-              href="https://bio.pixelabai.com/order-form"
+              href="https://bio.pixelabai.com/thank-you-free-guide"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-xl font-black text-lg transition-all"
@@ -59,7 +59,7 @@ export default function CTASection() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,229,255,0.5)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,229,255,0.2)"; }}
             >
-              Ver la guía completa $17
+              Guía completa por $17
             </a>
           </motion.div>
         </motion.div>

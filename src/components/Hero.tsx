@@ -78,16 +78,16 @@ export default function Hero() {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
           >
-            <span className="relative z-10">Empieza gratis — Descarga el primer módulo</span>
+            <span className="relative z-10">Empieza gratis</span>
           </a>
           <a
-            href="https://bio.pixelabai.com/order-form"
+            href="https://bio.pixelabai.com/thank-you-free-guide"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-4 rounded-xl font-semibold text-lg transition-all"
             style={{ border: "1px solid rgba(0,229,255,0.2)", color: "#00E5FF" }}
           >
-            Ver la guía completa $17
+            Guía completa por $17
           </a>
         </motion.div>
 
