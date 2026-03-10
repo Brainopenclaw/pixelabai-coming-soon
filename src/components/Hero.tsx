@@ -88,7 +88,7 @@ export default function Hero() {
             className="px-8 py-4 rounded-xl font-semibold text-lg transition-all"
             style={{ border: "1px solid rgba(0,229,255,0.2)", color: "#00E5FF" }}
           >
-            Ver la guía AIOS $17 →
+            Ver la guía completa $17 →
           </a>
         </motion.div>
 

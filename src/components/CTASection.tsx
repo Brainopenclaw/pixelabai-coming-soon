@@ -59,7 +59,7 @@ export default function CTASection() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,229,255,0.5)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,229,255,0.2)"; }}
             >
-              Comprar AIOS $17 →
+              Ver la guía completa $17 →
             </a>
           </motion.div>
         </motion.div>

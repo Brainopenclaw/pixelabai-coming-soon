@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Column 1: Brand */}
           <div>
-            <span className="text-2xl font-bold text-gradient-orange">
+            <span className="text-2xl font-bold text-gradient-cyan">
               Pixelab AI
             </span>
             <p className="text-sm text-text-muted mt-3 leading-relaxed">

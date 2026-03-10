@@ -28,7 +28,7 @@ function CountUp({
   }, [isInView, target]);
 
   return (
-    <span ref={ref} className="text-5xl md:text-6xl font-bold text-gradient-orange">
+    <span ref={ref} className="text-5xl md:text-6xl font-bold text-gradient-cyan">
       {count}
       {suffix}
     </span>
@@ -52,7 +52,7 @@ export default function SocialProof() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="rounded-2xl bg-gradient-to-br from-surface to-surface/80 border border-white/5 p-12 md:p-16"
+        className="rounded-2xl bg-[rgba(255,255,255,0.03)] border border-[rgba(0,229,255,0.2)] p-12 md:p-16"
       >
         <div className="grid md:grid-cols-3 gap-12 text-center">
           {stats.map((stat, index) => (

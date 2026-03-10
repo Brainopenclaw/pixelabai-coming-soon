@@ -47,8 +47,8 @@ function TimelineItem({ milestone, index }: { milestone: (typeof milestones)[0];
   return (
     <motion.div ref={ref} initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 }} className="relative pl-8 md:pl-12 pb-12 last:pb-0">
       <div className="absolute left-0 md:left-4 top-0 bottom-0 w-px bg-white/10" />
-      <div className="absolute left-[-4px] md:left-[12px] top-1.5 w-2.5 h-2.5 rounded-full bg-orange-500 ring-4 ring-orange-500/20" />
-      <span className="text-sm font-semibold text-orange-400 mb-1 block">{milestone.year}</span>
+      <div className="absolute left-[-4px] md:left-[12px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#00E5FF] ring-4 ring-[#00E5FF]/20" />
+      <span className="text-sm font-semibold text-[#00E5FF] mb-1 block">{milestone.year}</span>
       <h3 className="text-lg font-semibold mb-2">{milestone.title}</h3>
       <p className="text-gray-400 leading-relaxed text-sm">{milestone.description}</p>
     </motion.div>
@@ -63,12 +63,12 @@ export default function SobreMiPage() {
       <section className="relative py-24 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 via-transparent to-transparent" />
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-10">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }} className="w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-to-br from-orange-500/30 to-purple-500/30 border-2 border-white/10 flex items-center justify-center flex-shrink-0">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }} className="w-40 h-40 md:w-52 md:h-52 rounded-full bg-gradient-to-br from-[#00E5FF]/20 to-[#38bdf8]/20 border-2 border-white/10 flex items-center justify-center flex-shrink-0">
             <span className="text-5xl">👤</span>
           </motion.div>
           <div className="text-center md:text-left">
             <motion.h1 initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }} className="text-4xl md:text-5xl font-bold mb-3">Jorge De Armas</motion.h1>
-            <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.1 }} className="text-xl text-orange-400 font-medium mb-4">Fundador de Pixelab AI · Consultor de IA para Negocios</motion.p>
+            <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.1 }} className="text-xl text-[#00E5FF] font-medium mb-4">Fundador de Pixelab AI · Consultor de IA para Negocios</motion.p>
             <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.2 }} className="text-gray-400 leading-relaxed max-w-xl">
               Ayudo a emprendedores hispanohablantes a usar la inteligencia artificial para trabajar menos, producir más y escalar sus negocios de forma inteligente.
             </motion.p>
@@ -109,15 +109,15 @@ export default function SobreMiPage() {
           <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6 }} className="text-2xl md:text-3xl font-bold mb-8">Conecta conmigo</motion.h2>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="flex justify-center gap-4 mb-12">
             {socials.map((s) => (
-              <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-orange-500/50 transition-all">
-                <s.icon className="w-5 h-5 text-gray-400 hover:text-orange-400" />
+              <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-[#00E5FF]/50 transition-all">
+                <s.icon className="w-5 h-5 text-gray-400 hover:text-[#00E5FF]" />
               </a>
             ))}
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6, delay: 0.2 }}>
-            <Link href="/recursos" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-semibold rounded-xl hover:opacity-90 transition-opacity">
-              <Download className="w-5 h-5" />Descarga mi guía gratuita
-            </Link>
+            <a href="https://bio.pixelabai.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-[#00E5FF] text-[#0a0f1e] font-black rounded-xl hover:opacity-90 transition-opacity shadow-[0_0_28px_rgba(0,229,255,0.35)]">
+              <Download className="w-5 h-5" />Descarga 5 prompts gratis
+            </a>
           </motion.div>
         </div>
       </section>
