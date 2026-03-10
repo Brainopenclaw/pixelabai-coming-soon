@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function CTASection() {
   return (
-    <section className="relative py-24 px-6 overflow-hidden">
+    <section className="relative py-14 md:py-24 px-6 overflow-hidden">
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-32 blur-3xl"
         style={{ background: "rgba(0,229,255,0.15)" }}

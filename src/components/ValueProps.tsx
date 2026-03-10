@@ -33,7 +33,7 @@ const cards = [
 
 export default function ValueProps() {
   return (
-    <section className="py-24 px-6 max-w-6xl mx-auto">
+    <section className="py-14 md:py-24 px-6 max-w-6xl mx-auto">
       <motion.div
         variants={container}
         initial="hidden"

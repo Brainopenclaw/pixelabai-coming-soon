@@ -6,7 +6,7 @@ import AnimatedGrid, { GradientOrbs } from "./AnimatedGrid";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 md:py-0 px-6 overflow-hidden">
       <AnimatedGrid />
       <GradientOrbs />
 
@@ -32,7 +32,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full backdrop-blur-sm"
+          className="inline-flex items-center gap-2 mb-5 md:mb-8 px-4 py-2 rounded-full backdrop-blur-sm"
           style={{ border: "1px solid rgba(0,229,255,0.2)", background: "rgba(0,229,255,0.08)" }}
         >
           <span className="text-sm font-medium" style={{ color: "#00E5FF" }}>
@@ -54,7 +54,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg md:text-xl text-text-muted mb-10 max-w-2xl mx-auto"
+          className="text-lg md:text-xl text-text-muted mb-7 md:mb-10 max-w-2xl mx-auto"
         >
           Sin jerga técnica. Sin complicaciones. Solo resultados.
         </motion.p>

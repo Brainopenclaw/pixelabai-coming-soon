@@ -41,7 +41,7 @@ export default function EmailCapture() {
   };
 
   return (
-    <section id="email-capture" className="py-24 px-6" style={{ background: "linear-gradient(to bottom, #111827, #111827)" }}>
+    <section id="email-capture" className="py-14 md:py-24 px-6" style={{ background: "linear-gradient(to bottom, #111827, #111827)" }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

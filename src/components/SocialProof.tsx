@@ -43,7 +43,7 @@ const stats = [
 
 export default function SocialProof() {
   return (
-    <section className="relative py-24 px-6 max-w-6xl mx-auto">
+    <section className="relative py-14 md:py-24 px-6 max-w-6xl mx-auto">
       {/* Subtle orange gradient accent line at top */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
       
