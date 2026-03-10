@@ -11,23 +11,26 @@ const features = [
   { icon: Zap, title: "Sistema completo de prompts", desc: "Más de 30 prompts listos para usar en tu negocio desde el día 1." },
   { icon: Target, title: "Flujos de trabajo con IA", desc: "Automatiza contenido, emails, atención al cliente y más." },
   { icon: Clock, title: "Ahorra 10+ horas por semana", desc: "Delega a ChatGPT las tareas repetitivas que te quitan tiempo." },
-  { icon: Shield, title: "Garantía de 30 días", desc: "Si no te convence, te devolvemos el 100% sin preguntas." },
+  { icon: Shield, title: "Garantía de 7 días", desc: "Si no te convence, te devolvemos el 100% sin preguntas." },
 ];
 
 const includes = [
-  "Guía PDF de 47 páginas",
-  "30+ prompts probados para negocios",
-  "Plantilla de sistema operativo con IA",
-  "Flujos de automatización paso a paso",
+  "Guía completa en 7 módulos",
+  "El ALMA de tu AI — identidad y tono",
+  "Manual de Negocio para ChatGPT",
+  "Sistema de Memoria Viva",
+  "Tareas automáticas sin pedírselas",
+  "Los 3 Departamentos de tu negocio",
+  "Agent Mode — navega, ejecuta, conecta",
   "Acceso de por vida + actualizaciones",
-  "Comunidad privada de soporte",
 ];
 
 const faqs = [
-  { q: "¿Necesito saber programar?", a: "No. Esta guía está diseñada para emprendedores sin conocimientos técnicos. Todo se explica con ejemplos prácticos y paso a paso." },
-  { q: "¿Funciona con la versión gratuita de ChatGPT?", a: "Sí. La mayoría de los flujos funcionan con ChatGPT gratis. También incluimos instrucciones para versiones de pago." },
-  { q: "¿Cuánto tiempo tarda en implementarse?", a: "Puedes ver resultados desde el primer día. La guía completa se implementa en 1-2 semanas a tu ritmo." },
-  { q: "¿Hay garantía?", a: "Sí. 30 días de garantía total. Si no estás satisfecho, te devolvemos el 100% sin preguntas." },
+  { q: "¿Necesito ChatGPT Plus?", a: "Funciona con la versión gratuita. Con ChatGPT Plus los resultados son mejores — especialmente en Agent Mode. Si puedes invertir $20/mes, vale la pena." },
+  { q: "¿Cuánto tiempo toma configurarlo?", a: "El Módulo 01 toma 15 minutos. En 2-3 horas tienes el sistema completo funcionando. Es una guía paso a paso, no un curso de 40 horas." },
+  { q: "¿Necesito saber programar?", a: "No. Todo es copiar, pegar y personalizar. Sin código, sin integraciones complicadas. Solo ChatGPT y tu negocio." },
+  { q: "¿Cómo recibo la guía?", a: "Acceso inmediato después del pago. Te enviamos el link de descarga por email y también estará disponible en tu página de confirmación." },
+  { q: "¿Hay garantía?", a: "Sí. 7 días de garantía total. Si no sientes que esto transforma cómo trabajas con ChatGPT, te devolvemos el dinero. Sin preguntas." },
 ];
 
 function FAQItem({ q, a }: { q: string; a: string }) {
@@ -75,7 +78,7 @@ export default function CursoPage() {
             className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full"
             style={{ background: "rgba(0,229,255,0.08)", border: "1px solid rgba(0,229,255,0.2)" }}
           >
-            <span style={{ color: "#00E5FF" }} className="text-sm font-medium">🤖 Guía AIOS — Solo $17</span>
+            <span style={{ color: "#00E5FF" }} className="text-sm font-medium">🤖 Solo $17 — Acceso Inmediato</span>
           </motion.div>
 
           <motion.h1

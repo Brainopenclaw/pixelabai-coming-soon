@@ -48,16 +48,17 @@ export default function ValueProps() {
               key={card.title}
               variants={fadeUp}
               whileHover={{ scale: 1.02 }}
-              className="group relative p-10 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-all duration-300"
+              className="group relative p-10 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[rgba(0,229,255,0.4)] transition-all duration-300"
             >
               {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-secondary/0 group-hover:from-primary/10 group-hover:to-secondary/10 transition-all duration-300" />
+              <div className="absolute inset-0 rounded-2xl group-hover:bg-[rgba(0,229,255,0.03)] transition-all duration-300" />
               
               <div className="relative z-10">
-                <div className="w-16 h-16 mb-6 rounded-xl bg-gradient-to-br from-primary to-secondary p-[2px]">
-                  <div className="w-full h-full rounded-xl bg-surface flex items-center justify-center">
-                    <Icon className="w-8 h-8 text-primary" strokeWidth={2} />
-                  </div>
+                <div
+                  className="w-16 h-16 mb-6 rounded-xl flex items-center justify-center"
+                  style={{ background: "rgba(0,229,255,0.1)", border: "1px solid rgba(0,229,255,0.3)" }}
+                >
+                  <Icon className="w-8 h-8" style={{ color: "#00E5FF" }} strokeWidth={2} />
                 </div>
                 <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
                 <p className="text-text-muted leading-relaxed">{card.desc}</p>

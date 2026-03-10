@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Linkedin, Twitter, Instagram, Youtube, Download } from "lucide-react";
+import { Instagram, Youtube, Download } from "lucide-react";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
@@ -16,10 +16,9 @@ const milestones = [
 ];
 
 const socials = [
-  { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/in/jorgedearmas" },
-  { name: "Twitter", icon: Twitter, href: "https://twitter.com/jorgedearmas" },
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/jorgeailab" },
-  { name: "YouTube", icon: Youtube, href: "https://youtube.com/@pixelabai" },
+  { name: "TikTok", icon: null, href: "https://www.tiktok.com/@jorgeailab" },
+  { name: "YouTube", icon: Youtube, href: "https://youtube.com/@jorgeailab" },
 ];
 
 const personSchema = {
@@ -110,7 +109,13 @@ export default function SobreMiPage() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="flex justify-center gap-4 mb-12">
             {socials.map((s) => (
               <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-[#00E5FF]/50 transition-all">
-                <s.icon className="w-5 h-5 text-gray-400 hover:text-[#00E5FF]" />
+                {s.icon ? (
+                  <s.icon className="w-5 h-5 text-gray-400 hover:text-[#00E5FF]" />
+                ) : (
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current text-gray-400" aria-hidden="true">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
+                  </svg>
+                )}
               </a>
             ))}
           </motion.div>

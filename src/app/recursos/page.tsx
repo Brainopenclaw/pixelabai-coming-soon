@@ -96,9 +96,9 @@ export default function RecursosPage() {
       </section>
       <section className="py-20 px-6 text-center">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6 }} className="max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">¿Quieres más recursos exclusivos?</h2>
-          <p className="text-gray-400 mb-8">Únete a nuestra newsletter y recibe cada semana herramientas, prompts y estrategias de IA para tu negocio.</p>
-          <a href="https://bio.pixelabai.com/order-form" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-4 bg-[#00E5FF] text-[#0a0f1e] font-black rounded-xl hover:opacity-90 transition-opacity">Ver la guía completa $17 →</a>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">¿Listo para el siguiente nivel?</h2>
+          <p className="text-gray-400 mb-8">Construye un ChatGPT que conoce tu negocio, recuerda todo y trabaja solo. La guía completa por $17.</p>
+          <a href="https://bio.pixelabai.com/order-form" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-4 font-black rounded-xl transition-opacity hover:opacity-90" style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.45)" }}>Ver la guía completa $17 →</a>
         </motion.div>
       </section>
     </main>

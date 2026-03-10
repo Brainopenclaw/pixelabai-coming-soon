@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 
-const GUIDE_PDF_URL = "https://d1yei2z3i6k35z.cloudfront.net/16522596/6998e7aec38e8_GuiadeinstalaciondelAsistenteIA.pdf";
-
 export default function EmailCapture({ 
   title = "¿Quieres más contenido como este?", 
-  description = "Suscríbete y recibe guías prácticas de IA directo en tu email." 
+  description = "Suscríbete y recibe el primer módulo de la guía de ChatGPT gratis." 
 }: { 
   title?: string; 
   description?: string; 
@@ -61,15 +59,13 @@ export default function EmailCapture({
             <span className="font-semibold">¡Tu guía está en camino! 📬</span>
           </div>
           <a
-            href={GUIDE_PDF_URL}
+            href="https://bio.pixelabai.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors w-fit"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-semibold transition-colors w-fit"
+            style={{ background: "#00E5FF", color: "#0a0f1e" }}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Descargar Guía PDF
+            Acceder a tu contenido →
           </a>
           <p className="text-xs text-text-muted">También te la enviamos a tu email.</p>
         </div>

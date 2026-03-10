@@ -45,7 +45,7 @@ export default function CTASection() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
             >
-              Descargar guía gratis →
+              Empieza gratis — Primer módulo →
             </a>
             <a
               href="https://bio.pixelabai.com/order-form"

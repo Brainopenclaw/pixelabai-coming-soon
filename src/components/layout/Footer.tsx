@@ -8,9 +8,9 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://twitter.com/pixelabai", label: "Twitter", icon: "𝕏" },
-  { href: "https://youtube.com/@pixelabai", label: "YouTube", icon: "▶" },
-  { href: "https://www.instagram.com/jorgeailab", label: "Instagram", icon: "📷" },
+  { href: "https://www.instagram.com/jorgeailab", label: "Instagram", icon: "📸" },
+  { href: "https://www.tiktok.com/@jorgeailab", label: "TikTok", icon: "♪" },
+  { href: "https://youtube.com/@jorgeailab", label: "YouTube", icon: "▶" },
 ];
 
 export default function Footer() {

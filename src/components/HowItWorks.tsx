@@ -7,20 +7,20 @@ const steps = [
   {
     icon: Download,
     number: 1,
-    title: "Descarga la guía gratis",
-    desc: "Recibe nuestra guía con los fundamentos de IA para negocios",
+    title: "Empieza gratis",
+    desc: "Descarga el primer módulo de la guía de ChatGPT y empieza hoy.",
   },
   {
     icon: BookOpen,
     number: 2,
-    title: "Aprende a tu ritmo",
-    desc: "Sigue nuestros tutoriales paso a paso y aplica lo aprendido",
+    title: "Configura tu sistema",
+    desc: "Sigue los 7 módulos y construye un ChatGPT que habla como tú.",
   },
   {
     icon: Rocket,
     number: 3,
     title: "Transforma tu negocio",
-    desc: "Automatiza tareas y escala con inteligencia artificial",
+    desc: "Automatiza tareas y escala siendo un negocio de 1 persona con IA.",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function HowItWorks() {
       >
         {/* Connecting dotted lines (desktop only) */}
         <div className="hidden md:block absolute top-20 left-1/2 w-full -translate-x-1/2 h-0.5 pointer-events-none">
-          <div className="absolute left-[16.66%] right-[16.66%] top-0 border-t-2 border-dashed border-white/20" />
+          <div className="absolute left-[16.66%] right-[16.66%] top-0 border-t-2 border-dashed border-[rgba(0,229,255,0.2)]" />
         </div>
 
         {steps.map((step) => {
@@ -71,13 +71,19 @@ export default function HowItWorks() {
               variants={fadeUp}
               className="relative flex flex-col items-center text-center"
             >
-              {/* Numbered circle with gradient */}
+              {/* Numbered circle */}
               <div className="relative mb-6">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl font-bold text-white shadow-glow-orange">
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold text-[#00E5FF]"
+                  style={{ background: "rgba(0,229,255,0.1)", border: "2px solid rgba(0,229,255,0.3)" }}
+                >
                   {step.number}
                 </div>
-                <div className="absolute -bottom-2 -right-2 w-14 h-14 rounded-full bg-surface border-2 border-primary/30 flex items-center justify-center">
-                  <Icon className="w-7 h-7 text-primary" strokeWidth={2} />
+                <div
+                  className="absolute -bottom-2 -right-2 w-14 h-14 rounded-full flex items-center justify-center"
+                  style={{ background: "#111827", border: "2px solid rgba(0,229,255,0.3)" }}
+                >
+                  <Icon className="w-7 h-7" style={{ color: "#00E5FF" }} strokeWidth={2} />
                 </div>
               </div>
 

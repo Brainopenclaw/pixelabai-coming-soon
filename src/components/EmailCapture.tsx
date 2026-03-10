@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const GUIDE_PDF_URL = "https://d1yei2z3i6k35z.cloudfront.net/16522596/6998e7aec38e8_GuiadeinstalaciondelAsistenteIA.pdf";
-
 export default function EmailCapture() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -60,10 +58,10 @@ export default function EmailCapture() {
           }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            ¿Listo para empezar?
+            Empieza gratis hoy
           </h2>
           <p className="text-text-muted mb-8">
-            Descarga mis prompts gratis y configura tu <strong className="text-white">sistema de IA</strong> en menos de 1 hora
+            Recibe el primer módulo de la guía de ChatGPT. Sin costo. Solo resultados.
           </p>
 
           <AnimatePresence mode="wait">
@@ -83,13 +81,13 @@ export default function EmailCapture() {
                 <p className="text-xl font-semibold text-green-400">¡Tu guía está en camino! 📬</p>
                 <p className="text-sm text-text-muted mb-2">Revisa tu bandeja de entrada.</p>
                 <a
-                  href={GUIDE_PDF_URL}
+                  href="https://bio.pixelabai.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-black text-lg transition-all"
                   style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.35)" }}
                 >
-                  Descargar Guía PDF
+                  Acceder a tu contenido →
                 </a>
               </motion.div>
             ) : (
@@ -134,7 +132,7 @@ export default function EmailCapture() {
                       Enviando...
                     </>
                   ) : (
-                    "Obtén Tus 5 Prompts Gratis"
+                    "Acceder Gratis →"
                   )}
                 </button>
               </motion.form>

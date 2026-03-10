@@ -79,7 +79,7 @@ export default function Hero() {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
           >
-            <span className="relative z-10">Descarga tus 5 prompts gratis →</span>
+            <span className="relative z-10">Empieza gratis — Descarga el primer módulo →</span>
           </a>
           <a
             href="https://bio.pixelabai.com/order-form"
