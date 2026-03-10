@@ -9,32 +9,20 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
       <AnimatedGrid />
       <GradientOrbs />
-      
+
       {/* Floating gradient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"
+          animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: "rgba(0,229,255,0.1)" }}
         />
         <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full blur-3xl"
+          animate={{ x: [0, -80, 0], y: [0, 60, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl"
+          style={{ background: "rgba(0,229,255,0.07)" }}
         />
       </div>
 
@@ -44,13 +32,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full backdrop-blur-sm"
+          style={{ border: "1px solid rgba(0,229,255,0.2)", background: "rgba(0,229,255,0.08)" }}
         >
           <span className="text-xl">🚀</span>
-          <span className="text-sm font-medium text-text">
+          <span className="text-sm font-medium" style={{ color: "#00E5FF" }}>
             La guía #1 de IA en español
           </span>
-          <div className="absolute inset-0 rounded-full bg-primary/10 animate-pulse" />
         </motion.div>
 
         <motion.h1
@@ -59,10 +47,10 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
         >
-          Aprende a usar la IA para{" "}
-          <span className="text-gradient-orange">transformar tu negocio</span>
+          Construye el negocio de 1 persona{" "}
+          <span className="text-gradient-cyan">más eficiente con IA</span>
         </motion.h1>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -71,7 +59,7 @@ export default function Hero() {
         >
           Sin jerga técnica. Sin complicaciones. Solo resultados.
         </motion.p>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -79,21 +67,31 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="#email-capture"
-            className="group relative px-8 py-4 rounded-lg bg-primary text-white font-semibold text-lg hover:opacity-90 transition-opacity overflow-hidden"
+            href="https://bio.pixelabai.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative px-8 py-4 rounded-xl font-black text-lg transition-all overflow-hidden"
+            style={{
+              background: "#00E5FF",
+              color: "#0a0f1e",
+              boxShadow: "0 0 28px rgba(0,229,255,0.35)",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            <span className="relative z-10">Descarga la Guía Gratis →</span>
+            <span className="relative z-10">Descarga tus 5 prompts gratis →</span>
           </a>
-          <Link
-            href="/blog"
-            className="px-8 py-4 rounded-lg border border-white/20 text-text font-semibold text-lg hover:bg-white/5 hover:border-primary/40 transition-all"
+          <a
+            href="https://bio.pixelabai.com/order-form"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 rounded-xl font-semibold text-lg transition-all"
+            style={{ border: "1px solid rgba(0,229,255,0.2)", color: "#00E5FF" }}
           >
-            Ver el blog →
-          </Link>
+            Ver la guía AIOS $17 →
+          </a>
         </motion.div>
-        
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

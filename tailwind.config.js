@@ -7,12 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0a",
-        surface: "#111111",
-        primary: "#ff6b35",
-        secondary: "#f7c948",
+        background: "#111827",
+        surface: "rgba(255,255,255,0.03)",
+        primary: "#00E5FF",
+        secondary: "#38bdf8",
         text: "#ffffff",
-        "text-muted": "#a0a0a0",
+        "text-muted": "#9ca3af",
+        border: "rgba(0,229,255,0.2)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
@@ -35,8 +36,9 @@ module.exports = {
         badge: "9999px",
       },
       boxShadow: {
+        "glow-cyan": "0 0 28px rgba(0,229,255,0.35)",
+        "glow-cyan-lg": "0 0 44px rgba(0,229,255,0.55)",
         "glow-orange": "0 0 20px rgba(255, 107, 53, 0.3)",
-        "glow-blue": "0 0 20px rgba(59, 130, 246, 0.3)",
       },
     },
   },

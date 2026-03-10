@@ -12,11 +12,11 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    "bg-primary text-white hover:bg-primary/90 shadow-glow-orange",
+    "bg-[#00E5FF] text-[#0a0f1e] font-black shadow-glow-cyan hover:shadow-glow-cyan-lg",
   secondary:
-    "bg-surface text-text border border-white/10 hover:border-white/20",
+    "bg-transparent text-text border border-[rgba(0,229,255,0.2)] hover:border-[rgba(0,229,255,0.4)]",
   ghost: "bg-transparent text-text-muted hover:text-text hover:bg-white/5",
-  cta: "bg-primary text-white hover:bg-primary/90 shadow-glow-orange animate-pulse-glow",
+  cta: "bg-[#00E5FF] text-[#0a0f1e] font-black shadow-glow-cyan hover:shadow-glow-cyan-lg",
 };
 
 const sizeStyles = {
@@ -30,9 +30,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <motion.button
         ref={ref}
-        whileHover={{ scale: 1.02 }}
+        whileHover={{ scale: 1.02, y: -1 }}
         whileTap={{ scale: 0.98 }}
-        className={`inline-flex items-center justify-center font-medium rounded-button transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:pointer-events-none ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+        className={`inline-flex items-center justify-center rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[#00E5FF]/50 disabled:opacity-50 disabled:pointer-events-none ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
         {...props}
       >
         {children}

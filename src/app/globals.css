@@ -4,21 +4,64 @@
 
 @layer base {
   body {
-    background-color: #0a0a0a;
+    background-color: #111827;
     color: #ffffff;
+  }
+
+  html::before {
+    content: '';
+    background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  html::after {
+    content: '';
+    background: radial-gradient(circle, rgba(0,229,255,0.07), transparent 65%);
+    position: fixed;
+    top: -20%;
+    left: -15%;
+    width: 55%;
+    height: 55%;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    background: radial-gradient(circle, rgba(0,229,255,0.05), transparent 65%);
+    position: fixed;
+    bottom: -15%;
+    right: -10%;
+    width: 45%;
+    height: 45%;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
   }
 }
 
 @layer utilities {
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, #00E5FF 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .text-gradient-orange {
-    background: linear-gradient(135deg, #ff6b35, #f7c948);
+    background: linear-gradient(135deg, #00E5FF 0%, #38bdf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-gradient-blue {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #00E5FF 0%, #38bdf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

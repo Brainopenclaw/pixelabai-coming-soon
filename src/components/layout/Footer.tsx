@@ -15,13 +15,13 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 py-16 px-6">
+    <footer className="py-16 px-6" style={{ borderTop: "1px solid rgba(0,229,255,0.2)", background: "#111827" }}>
       <div className="max-w-container-width mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <span className="text-xl font-bold text-gradient-orange">Pixelab AI</span>
+            <span className="text-xl font-bold text-gradient-cyan">Pixelab AI</span>
             <p className="text-small text-text-muted mt-2 max-w-xs">
-              Aprende IA. Aplícala. Crece.
+              Construye con IA. En español.
             </p>
           </div>
 
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/5 pt-8 text-center">
+        <div className="pt-8 text-center" style={{ borderTop: "1px solid rgba(0,229,255,0.1)" }}>
           <p className="text-xs text-text-muted">
             © {new Date().getFullYear()} Pixelab AI. Todos los derechos reservados.
           </p>

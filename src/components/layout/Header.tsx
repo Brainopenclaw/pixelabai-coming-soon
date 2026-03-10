@@ -32,11 +32,12 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-background/80 backdrop-blur-lg border-b border-white/5" : "bg-transparent"
+          scrolled ? "backdrop-blur-lg" : "bg-transparent"
         }`}
+        style={scrolled ? { background: "rgba(17,24,39,0.85)", borderBottom: "1px solid rgba(0,229,255,0.2)" } : {}}
       >
         <div className="max-w-container-width mx-auto flex items-center justify-between px-6 py-4">
-          <Link href="/" className="text-xl font-bold text-gradient-orange">
+          <Link href="/" className="text-xl font-bold text-gradient-cyan">
             Pixelab AI
           </Link>
 

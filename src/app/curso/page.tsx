@@ -1,79 +1,60 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Clock, CheckCircle2, AlertCircle, Zap } from "lucide-react";
-import JsonLd from "@/components/JsonLd";
-import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import { ChevronDown, Check, Zap, Clock, Target, Shield } from "lucide-react";
+import Link from "next/link";
 
-const painPoints = [
-  { icon: Clock, title: "Pierdes horas en tareas que la IA hace en minutos", description: "Crear contenido, responder emails, organizar datos... todo manual, todo lento." },
-  { icon: AlertCircle, title: "No sabes por dónde empezar con la IA", description: "Hay demasiadas herramientas y tutoriales, pero ninguno pensado para tu negocio." },
-  { icon: Zap, title: "Tu competencia ya está usando IA", description: "Mientras tú dudas, otros están automatizando y creciendo más rápido." },
-  { icon: AlertCircle, title: "Intentaste pero no viste resultados", description: "Probaste ChatGPT un par de veces pero no supiste cómo aplicarlo a tu día a día." },
+const ORDER_FORM_URL = "https://bio.pixelabai.com/order-form";
+
+const features = [
+  { icon: Zap, title: "Sistema completo de prompts", desc: "Más de 30 prompts listos para usar en tu negocio desde el día 1." },
+  { icon: Target, title: "Flujos de trabajo con IA", desc: "Automatiza contenido, emails, atención al cliente y más." },
+  { icon: Clock, title: "Ahorra 10+ horas por semana", desc: "Delega a ChatGPT las tareas repetitivas que te quitan tiempo." },
+  { icon: Shield, title: "Garantía de 30 días", desc: "Si no te convence, te devolvemos el 100% sin preguntas." },
 ];
 
-const weeks = [
-  { week: "Semana 1", title: "Fundamentos de IA para Negocios", topics: ["Qué es la IA y cómo funciona (sin tecnicismos)", "Las 5 herramientas esenciales que necesitas", "Tu primer flujo de trabajo automatizado"] },
-  { week: "Semana 2", title: "Contenido y Marketing con IA", topics: ["Crear contenido para redes sociales en minutos", "Email marketing automatizado con IA", "Copywriting de ventas potenciado con prompts"] },
-  { week: "Semana 3", title: "Automatización y Productividad", topics: ["Automatizar tareas repetitivas de tu negocio", "Sistemas de atención al cliente con IA", "Gestión de proyectos inteligente"] },
-  { week: "Semana 4", title: "Estrategia y Escalamiento", topics: ["Análisis de datos y toma de decisiones con IA", "Escalar tu negocio sin escalar tu equipo", "Tu plan de acción personalizado con IA"] },
+const includes = [
+  "Guía PDF de 47 páginas",
+  "30+ prompts probados para negocios",
+  "Plantilla de sistema operativo con IA",
+  "Flujos de automatización paso a paso",
+  "Acceso de por vida + actualizaciones",
+  "Comunidad privada de soporte",
 ];
 
 const faqs = [
-  { q: "¿Necesito conocimientos técnicos para tomar el curso?", a: "No. El curso está diseñado para emprendedores y dueños de negocio sin experiencia técnica. Todo se explica paso a paso con ejemplos prácticos." },
-  { q: "¿Cuánto tiempo necesito dedicar por semana?", a: "Aproximadamente 2-3 horas semanales. Cada módulo incluye videos cortos, ejercicios prácticos y plantillas listas para usar." },
-  { q: "¿Las herramientas que se enseñan son gratuitas?", a: "La mayoría de herramientas tienen planes gratuitos suficientes para empezar. Indicamos alternativas gratuitas para cada herramienta de pago mencionada." },
-  { q: "¿Cuándo estará disponible el curso?", a: "Estamos preparando el lanzamiento. Al unirte a la lista de espera, serás de los primeros en acceder con un precio especial de lanzamiento." },
-  { q: "¿Hay garantía de devolución?", a: "Sí. Ofreceremos una garantía de 30 días. Si no estás satisfecho, te devolvemos el 100% de tu inversión sin preguntas." },
+  { q: "¿Necesito saber programar?", a: "No. Esta guía está diseñada para emprendedores sin conocimientos técnicos. Todo se explica con ejemplos prácticos y paso a paso." },
+  { q: "¿Funciona con la versión gratuita de ChatGPT?", a: "Sí. La mayoría de los flujos funcionan con ChatGPT gratis. También incluimos instrucciones para versiones de pago." },
+  { q: "¿Cuánto tiempo tarda en implementarse?", a: "Puedes ver resultados desde el primer día. La guía completa se implementa en 1-2 semanas a tu ritmo." },
+  { q: "¿Hay garantía?", a: "Sí. 30 días de garantía total. Si no estás satisfecho, te devolvemos el 100% sin preguntas." },
 ];
-
-const courseSchema = {
-  "@context": "https://schema.org",
-  "@type": "Course",
-  name: "IA para Tu Negocio",
-  description: "Programa de 4 semanas para aprender a usar la IA en tu negocio",
-  provider: {
-    "@type": "Organization",
-    name: "Pixelab AI"
-  },
-  educationalLevel: "Beginner",
-  inLanguage: "es",
-  numberOfCredits: "4 semanas"
-};
-
-const faqPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.a
-    }
-  }))
-};
-
-const breadcrumbItems = [
-  { name: "Home", url: "https://pixelabai.com" },
-  { name: "Curso", url: "https://pixelabai.com/curso" }
-];
-
-const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-white/10 rounded-xl overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors" aria-expanded={open}>
+    <div
+      className="rounded-xl overflow-hidden"
+      style={{ border: "1px solid rgba(0,229,255,0.2)" }}
+    >
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+        aria-expanded={open}
+      >
         <span className="font-medium text-base pr-4">{q}</span>
-        <ChevronDown className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`} style={{ color: "#00E5FF" }} />
       </button>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
-            <p className="px-5 pb-5 text-gray-400 leading-relaxed">{a}</p>
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <p className="px-5 pb-5 text-text-muted leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -81,184 +62,203 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-function WaitlistForm() {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    setError("");
-
-    if (!email) {
-      setError("El email es obligatorio.");
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Por favor ingresa un email válido.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, firstName: firstName || undefined, source: 'curso' }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Error al registrarte. Inténtalo de nuevo.");
-      }
-      setSuccess(true);
-      // GA4 conversion event
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'form_submit', { event_category: 'lead', event_label: 'curso_waitlist', source: 'curso' });
-      }
-      setEmail("");
-      setFirstName("");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Error al registrarte. Inténtalo de nuevo.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  if (success) {
-    return (
-      <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6 text-center">
-        <CheckCircle2 className="w-8 h-8 text-green-400 mx-auto mb-3" />
-        <p className="text-green-300 font-medium">
-          ¡Gracias! Te avisaremos cuando el curso esté listo con el precio especial de lanzamiento.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
-      <input
-        type="text"
-        placeholder="Tu nombre (opcional)"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-colors"
-      />
-      <input
-        type="email"
-        placeholder="Tu email *"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-colors"
-      />
-      {error && (
-        <p className="text-red-400 text-sm flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          {error}
-        </p>
-      )}
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
-      >
-        {loading ? "Registrando..." : "Únete a la lista de espera →"}
-      </button>
-    </form>
-  );
-}
-
 export default function CursoPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a]">
-      <JsonLd data={courseSchema} />
-      <JsonLd data={faqPageSchema} />
-      <BreadcrumbJsonLd items={breadcrumbItems} />
-      <section className="relative py-24 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7 }} className="inline-block mb-6">
-            <span className="px-4 py-2 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full border border-blue-500/30">🚀 Próximamente</span>
+    <main className="relative min-h-screen" style={{ background: "#111827" }}>
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full"
+            style={{ background: "rgba(0,229,255,0.08)", border: "1px solid rgba(0,229,255,0.2)" }}
+          >
+            <span style={{ color: "#00E5FF" }} className="text-sm font-medium">🤖 Guía AIOS — Solo $17</span>
           </motion.div>
-          <motion.h1 initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.1 }} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            IA para <span className="text-gradient-blue">Tu Negocio</span>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-6xl font-black leading-tight mb-6"
+          >
+            Convierte ChatGPT en el{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #00E5FF 0%, #38bdf8 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Sistema Operativo
+            </span>{" "}
+            de tu Negocio
           </motion.h1>
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.2 }} className="text-lg md:text-xl text-gray-400 mb-4 max-w-2xl mx-auto">
-            El curso práctico que te enseña a usar inteligencia artificial para ahorrar tiempo, crear contenido y hacer crecer tu negocio — sin necesidad de ser técnico.
-          </motion.p>
-          <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.3 }} className="text-sm text-gray-500">
-            4 semanas · 100% online · Ejercicios prácticos · Comunidad privada
-          </motion.p>
-        </div>
-      </section>
 
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold text-center mb-14">
-            ¿Te suena familiar? 🤔
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {painPoints.map((point, i) => (
-              <motion.div key={point.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-white/5 border border-white/10 rounded-xl p-6 flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                  <point.icon className="w-5 h-5 text-red-400" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">{point.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{point.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg md:text-xl text-text-muted mb-10 max-w-2xl mx-auto"
+          >
+            La guía práctica para emprendedores que quieren automatizar su negocio con IA sin saber programar.
+          </motion.p>
 
-      <section className="py-20 px-6 bg-white/[0.02]">
-        <div className="max-w-4xl mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">📚 Lo que aprenderás</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Un programa de 4 semanas diseñado para que implementes IA en tu negocio paso a paso.</p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <a
+              href={ORDER_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-5 rounded-xl font-black text-xl transition-all"
+              style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.35)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+            >
+              Obtener AIOS por $17 →
+            </a>
+            <a
+              href="https://bio.pixelabai.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium transition-all"
+              style={{ color: "#9ca3af" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#00E5FF"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#9ca3af"; }}
+            >
+              O descarga 5 prompts gratis primero →
+            </a>
           </motion.div>
-          <div className="space-y-6">
-            {weeks.map((w, i) => (
-              <motion.div key={w.week} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-semibold rounded-full">{w.week}</span>
-                  <h3 className="text-lg font-semibold">{w.title}</h3>
+
+          <p className="mt-4 text-sm text-text-muted">✅ Garantía 30 días · Acceso inmediato · Pago seguro</p>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            ¿Qué incluye la guía?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {features.map((f, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="p-6 rounded-2xl"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(0,229,255,0.2)",
+                  borderTop: "3px solid #00E5FF",
+                  boxShadow: "0 0 40px rgba(0,229,255,0.07)",
+                }}
+              >
+                <div className="flex items-start gap-4">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: "rgba(0,229,255,0.1)" }}
+                  >
+                    <f.icon className="w-6 h-6" style={{ color: "#00E5FF" }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">{f.title}</h3>
+                    <p className="text-text-muted text-sm">{f.desc}</p>
+                  </div>
                 </div>
-                <ul className="space-y-2">
-                  {w.topics.map((topic) => (
-                    <li key={topic} className="flex items-start gap-2 text-sm text-gray-400">
-                      <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />{topic}
-                    </li>
-                  ))}
-                </ul>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* What's included */}
       <section className="py-20 px-6">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.6 }} className="max-w-lg mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Únete a la lista de espera 🎯</h2>
-          <p className="text-gray-400 mb-8">Sé de los primeros en acceder al curso con un precio especial de lanzamiento. Sin compromiso.</p>
-          <WaitlistForm />
-          <p className="text-xs text-gray-500 mt-4">Solo te enviaremos información sobre el curso. Cero spam.</p>
-        </motion.div>
+        <div className="max-w-2xl mx-auto">
+          <div
+            className="p-8 rounded-2xl"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(0,229,255,0.2)",
+              borderTop: "3px solid #00E5FF",
+              boxShadow: "0 0 40px rgba(0,229,255,0.07)",
+            }}
+          >
+            <h2 className="text-2xl font-bold mb-6 text-center">Todo lo que obtienes por $17</h2>
+            <ul className="space-y-4 mb-8">
+              {includes.map((item, i) => (
+                <li key={i} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(0,229,255,0.15)" }}>
+                    <Check className="w-4 h-4" style={{ color: "#00E5FF" }} />
+                  </div>
+                  <span className="text-white font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={ORDER_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-center py-5 rounded-xl font-black text-xl transition-all"
+              style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.35)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; }}
+            >
+              Sí, quiero AIOS por $17 →
+            </a>
+            <p className="text-center text-xs text-text-muted mt-3">Garantía de devolución 30 días. Sin riesgo.</p>
+          </div>
+        </div>
       </section>
 
-      <section className="py-20 px-6 bg-white/[0.02]">
-        <div className="max-w-3xl mx-auto">
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} transition={{ duration: 0.6 }} className="text-3xl md:text-4xl font-bold text-center mb-14">
-            Preguntas Frecuentes
-          </motion.h2>
-          <div className="space-y-3">
-            {faqs.map((faq) => (<FAQItem key={faq.q} q={faq.q} a={faq.a} />))}
+      {/* FAQ */}
+      <section className="py-20 px-6">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-10">Preguntas frecuentes</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <FAQItem key={i} {...faq} />
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 px-6 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">¿Listo para empezar?</h2>
+          <p className="text-text-muted mb-8">Acceso inmediato. Solo $17. Sin suscripciones.</p>
+          <a
+            href={ORDER_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-12 py-5 rounded-xl font-black text-xl transition-all"
+            style={{ background: "#00E5FF", color: "#0a0f1e", boxShadow: "0 0 28px rgba(0,229,255,0.35)" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 44px rgba(0,229,255,0.55)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(0,229,255,0.35)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+          >
+            Obtener AIOS por $17 →
+          </a>
+          <p className="mt-4 text-sm text-text-muted">
+            ¿Quieres probar primero?{" "}
+            <a
+              href="https://bio.pixelabai.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#00E5FF" }}
+            >
+              Descarga 5 prompts gratis →
+            </a>
+          </p>
         </div>
       </section>
     </main>
