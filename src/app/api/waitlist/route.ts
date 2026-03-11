@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const SYSTEME_API_URL = 'https://api.systeme.io/api/contacts'
-const COURSE_WAITLIST_TAG_ID = 1892958
+const COURSE_WAITLIST_TAG_ID = 1913458 // course-waitlist (recreated 2026-03-10)
 
 // Proper email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
