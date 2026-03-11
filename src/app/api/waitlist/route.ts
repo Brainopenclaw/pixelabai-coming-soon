@@ -6,6 +6,11 @@ const COURSE_WAITLIST_TAG_ID = 1892958
 // Proper email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+// Rate limiting: track IPs in memory (resets on cold start)
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+const RATE_LIMIT = 3     // max submissions per window
+const RATE_WINDOW = 60_000 // 1 minute
+
 export async function POST(request: NextRequest) {
   try {
     // Runtime validation for required environment variable
@@ -15,7 +20,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
 
-    const { email, firstName, source } = await request.json()
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+    const now = Date.now()
+    const rl = rateLimitMap.get(ip)
+    if (rl && now < rl.resetAt) {
+      if (rl.count >= RATE_LIMIT) {
+        return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+      }
+      rl.count++
+    } else {
+      rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW })
+    }
+
+    const body = await request.json()
+    const { email, firstName, source } = body
+
+    // Honeypot — bots fill this hidden field, humans never see it
+    if (body.website_url !== undefined && body.website_url !== '') {
+      // Silently succeed to not tip off bots
+      return NextResponse.json({ success: true })
+    }
 
     // Validate email with proper regex
     if (!email || !EMAIL_REGEX.test(email)) {
@@ -26,6 +50,16 @@ export async function POST(request: NextRequest) {
     const trimmedFirstName = firstName?.trim() || ''
     if (trimmedFirstName.length === 0) {
       return NextResponse.json({ error: 'First name is required' }, { status: 400 })
+    }
+
+    // Block obviously random/bot names (no spaces, >15 chars, mixed case gibberish)
+    const looksLikeBot = trimmedFirstName.length > 15 &&
+      !trimmedFirstName.includes(' ') &&
+      /[A-Z]/.test(trimmedFirstName) &&
+      /[a-z]/.test(trimmedFirstName) &&
+      !/^[A-Z][a-z]+$/.test(trimmedFirstName)
+    if (looksLikeBot) {
+      return NextResponse.json({ success: true }) // silent reject
     }
 
     const headers = {

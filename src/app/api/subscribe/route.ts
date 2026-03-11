@@ -3,9 +3,28 @@ import { NextRequest, NextResponse } from 'next/server'
 const SYSTEME_API_KEY = process.env.SYSTEME_API_KEY!
 const SYSTEME_API_URL = 'https://api.systeme.io/api/contacts'
 
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+
 export async function POST(request: NextRequest) {
   try {
-    const { email, source } = await request.json()
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+    const now = Date.now()
+    const rl = rateLimitMap.get(ip)
+    if (rl && now < rl.resetAt) {
+      if (rl.count >= 3) return NextResponse.json({ success: true }) // silent reject
+      rl.count++
+    } else {
+      rateLimitMap.set(ip, { count: 1, resetAt: now + 60_000 })
+    }
+
+    const body = await request.json()
+    const { email, source } = body
+
+    // Honeypot
+    if (body.website_url !== undefined && body.website_url !== '') {
+      return NextResponse.json({ success: true })
+    }
+
     if (!email || !email.includes('@')) {
       return NextResponse.json({ error: 'Email inválido' }, { status: 400 })
     }
