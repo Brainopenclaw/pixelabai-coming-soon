@@ -23,6 +23,7 @@ const includes = [
   "Los 3 Departamentos de tu negocio",
   "Agent Mode — navega, ejecuta, conecta",
   "Acceso de por vida + actualizaciones",
+  "🎁 Canal Privado de WhatsApp — automatizaciones reales cada semana",
 ];
 
 const faqs = [

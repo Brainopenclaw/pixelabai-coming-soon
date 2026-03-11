@@ -3,6 +3,7 @@ import Link from "next/link";
 import MdxContent from "@/components/blog/MdxContent";
 import TableOfContents from "@/components/blog/TableOfContents";
 import EmailCapture from "@/components/blog/EmailCapture";
+import { BlogCTA } from "@/components/BlogCTA";
 import JsonLd from "@/components/JsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { getAllPosts, getPostBySlug, getRelatedPosts, extractHeadings } from "@/lib/blog";
@@ -142,6 +143,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
 
             <EmailCapture />
+            <BlogCTA />
 
             {related.length > 0 && (
               <section className="mt-12">

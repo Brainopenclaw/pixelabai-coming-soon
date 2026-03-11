@@ -4,6 +4,7 @@ import BlogPreview from "@/components/BlogPreview";
 import SocialProof from "@/components/SocialProof";
 import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/layout/Footer";
+import { CanalBonusBlock } from "@/components/CanalBonusBlock";
 import { getAllPosts } from "@/lib/blog";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Hero />
       <ValueProps />
+      <CanalBonusBlock />
       <BlogPreview posts={posts} />
       <SocialProof />
       <EmailCapture />
