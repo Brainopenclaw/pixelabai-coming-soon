@@ -11,6 +11,8 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT = 3     // max submissions per window
 const RATE_WINDOW = 60_000 // 1 minute
 
+const ALLOWED_ORIGINS = ['https://pixelabai.com', 'https://www.pixelabai.com']
+
 export async function POST(request: NextRequest) {
   try {
     // Runtime validation for required environment variable
@@ -18,6 +20,16 @@ export async function POST(request: NextRequest) {
     if (!SYSTEME_API_KEY) {
       console.error('SYSTEME_API_KEY environment variable is not configured')
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+    }
+
+    // Origin/Referer validation — block direct API calls from bots
+    const isDev = process.env.NODE_ENV === 'development'
+    if (!isDev) {
+      const referer = request.headers.get('referer') ?? ''
+      const origin = request.headers.get('origin') ?? ''
+      if (!ALLOWED_ORIGINS.some(o => referer.startsWith(o) || origin.startsWith(o))) {
+        return NextResponse.json({ success: true }) // silent reject
+      }
     }
 
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
@@ -37,8 +49,16 @@ export async function POST(request: NextRequest) {
 
     // Honeypot — bots fill this hidden field, humans never see it
     if (body.website_url !== undefined && body.website_url !== '') {
-      // Silently succeed to not tip off bots
-      return NextResponse.json({ success: true })
+      return NextResponse.json({ success: true }) // silent reject
+    }
+
+    // Timing check — reject if submitted in under 2 seconds (likely bot)
+    const formToken = body.form_token
+    if (formToken) {
+      const elapsed = Date.now() - parseInt(formToken, 10)
+      if (elapsed < 2000) {
+        return NextResponse.json({ success: true }) // silent reject
+      }
     }
 
     // Validate email with proper regex
@@ -52,12 +72,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'First name is required' }, { status: 400 })
     }
 
-    // Block obviously random/bot names (no spaces, >15 chars, mixed case gibberish)
-    const looksLikeBot = trimmedFirstName.length > 15 &&
-      !trimmedFirstName.includes(' ') &&
-      /[A-Z]/.test(trimmedFirstName) &&
-      /[a-z]/.test(trimmedFirstName) &&
-      !/^[A-Z][a-z]+$/.test(trimmedFirstName)
+    // Enhanced bot name detection
+    const looksLikeBot =
+      // Too short
+      trimmedFirstName.length < 2 ||
+      // No vowels — catches random consonant strings like "SpojKDQ" or "XmKpQ"
+      !/[aeiouáéíóúü]/i.test(trimmedFirstName) ||
+      // Long mixed-case gibberish
+      (trimmedFirstName.length > 15 &&
+        !trimmedFirstName.includes(' ') &&
+        /[A-Z]/.test(trimmedFirstName) &&
+        /[a-z]/.test(trimmedFirstName) &&
+        !/^[A-Z][a-z]+$/.test(trimmedFirstName))
     if (looksLikeBot) {
       return NextResponse.json({ success: true }) // silent reject
     }
@@ -83,7 +109,6 @@ export async function POST(request: NextRequest) {
     })
 
     if (createRes.ok) {
-      // New contact created — grab the ID
       const contact = await createRes.json()
       contactId = contact.id
     } else if (createRes.status === 422) {
@@ -118,14 +143,12 @@ export async function POST(request: NextRequest) {
         }
       )
       if (!tagRes.ok && tagRes.status !== 409) {
-        // 409 = tag already assigned, which is fine
         console.error('Failed to assign tag:', tagRes.status, await tagRes.text().catch(() => ''))
       }
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    // Log error for debugging
     console.error('Waitlist API error:', error)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }

@@ -4,10 +4,24 @@ const SYSTEME_API_KEY = process.env.SYSTEME_API_KEY!
 const SYSTEME_API_URL = 'https://api.systeme.io/api/contacts'
 const FREE_GUIDE_TAG_ID = 1913453 // chatgpt-free-guide
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+
+const ALLOWED_ORIGINS = ['https://pixelabai.com', 'https://www.pixelabai.com']
 
 export async function POST(request: NextRequest) {
   try {
+    // Origin/Referer validation — block direct API calls from bots
+    const isDev = process.env.NODE_ENV === 'development'
+    if (!isDev) {
+      const referer = request.headers.get('referer') ?? ''
+      const origin = request.headers.get('origin') ?? ''
+      if (!ALLOWED_ORIGINS.some(o => referer.startsWith(o) || origin.startsWith(o))) {
+        return NextResponse.json({ success: true }) // silent reject
+      }
+    }
+
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
     const now = Date.now()
     const rl = rateLimitMap.get(ip)
@@ -21,14 +35,24 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { email, source } = body
 
-    // Honeypot
+    // Honeypot — bots fill this hidden field, humans never see it
     if (body.website_url !== undefined && body.website_url !== '') {
       return NextResponse.json({ success: true })
     }
 
-    if (!email || !email.includes('@')) {
+    // Timing check — reject if form submitted in under 2 seconds (likely bot)
+    const formToken = body.form_token
+    if (formToken) {
+      const elapsed = Date.now() - parseInt(formToken, 10)
+      if (elapsed < 2000) {
+        return NextResponse.json({ success: true }) // silent reject
+      }
+    }
+
+    if (!email || !EMAIL_REGEX.test(email)) {
       return NextResponse.json({ error: 'Email inválido' }, { status: 400 })
     }
+
     const apiHeaders = {
       'X-API-Key': SYSTEME_API_KEY,
       'Content-Type': 'application/json',

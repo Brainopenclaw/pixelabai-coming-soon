@@ -1,12 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function EmailCapture() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [formToken, setFormToken] = useState("");
+  const honeypotRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setFormToken(Date.now().toString());
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +28,12 @@ export default function EmailCapture() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "homepage" }),
+        body: JSON.stringify({ 
+          email, 
+          source: "homepage",
+          website_url: honeypotRef.current?.value ?? "",
+          form_token: formToken,
+        }),
       });
       const data = await res.json();
       if (data.success) {
@@ -99,6 +110,18 @@ export default function EmailCapture() {
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-3 max-w-lg mx-auto w-full"
               >
+                {/* Honeypot — hidden from humans, bots fill it */}
+                <input
+                  ref={honeypotRef}
+                  type="text"
+                  name="website_url"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}
+                />
+                {/* Form load timestamp — used server-side to reject instant bot submissions */}
+                <input type="hidden" name="form_token" value={formToken} />
                 <input
                   type="email"
                   value={email}
